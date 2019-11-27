@@ -2,20 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RaycastSelection : MonoBehaviour{
+[RequireComponent(typeof(LineRenderer))]
+public class RaycastSelection : MonoBehaviour {
+    private const string SELECTABLE = "Selectable"; // TODO ali, Tags in ENUMS auslagern
+    private LineRenderer lineRenderer;
 
-    float maxDistance = 500;
-
-
-    void Start(){
-
+    void Start() {
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
-    // Update is called once per frame
-    void Update(){
-        Debug.Log(gameObject.transform.position);
-        Debug.DrawRay(gameObject.transform.position, transform.TransformDirection(Vector3.forward), Color.red, 0, true);
-        
+    void Update() {
+
+        RaycastHit hit;
+
+        lineRenderer.SetPosition(0, transform.position);
+        Debug.DrawRay(transform.position, Vector3.forward, Color.red, 0);
+        if (Physics.Raycast(transform.position, Vector3.forward, out hit)) {
+            if (hit.collider.tag.Equals(SELECTABLE)) {
+                lineRenderer.SetPosition(1, new Vector3(0, 0, hit.distance));
+            }
+
+        } else {
+            lineRenderer.SetPosition(1, transform.forward * 2000);
+        }
+
+
+
     }
 
 }
