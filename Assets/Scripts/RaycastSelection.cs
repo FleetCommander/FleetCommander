@@ -6,28 +6,25 @@ using UnityEngine;
 public class RaycastSelection : MonoBehaviour {
     private const string SELECTABLE = "Selectable"; // TODO ali, Tags in ENUMS auslagern
     private LineRenderer lineRenderer;
+    private Vector3[] points = new Vector3[2];
+
 
     void Start() {
         lineRenderer = GetComponent<LineRenderer>();
+        lineRenderer.positionCount = 2;
     }
 
     void Update() {
 
-        RaycastHit hit;
 
-        lineRenderer.SetPosition(0, transform.position);
-        Debug.DrawRay(transform.position, Vector3.forward, Color.red, 0);
-        if (Physics.Raycast(transform.position, Vector3.forward, out hit)) {
-            if (hit.collider.tag.Equals(SELECTABLE)) {
-                lineRenderer.SetPosition(1, new Vector3(0, 0, hit.distance));
-            }
-
-        } else {
-            lineRenderer.SetPosition(1, transform.forward * 2000);
-        }
+        points[0] = transform.position;
+        points[1] = transform.forward * 1000;
+        
+        lineRenderer.SetPositions(points);
+        Debug.DrawRay(transform.position, transform.forward * 1000, Color.red, 0);
 
 
-
+      
     }
 
 }
