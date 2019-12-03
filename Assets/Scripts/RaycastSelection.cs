@@ -9,12 +9,10 @@ public class RaycastSelection : MonoBehaviour {
 
     [SerializeField]
     private GameObject dot;
-
     private Material material;
-    
     private float defaultLength = 5.0f;
-
     private LineRenderer lineRenderer = null;
+    private Transform lastHitTransform;
 
 
     void Awake() {
@@ -25,30 +23,27 @@ public class RaycastSelection : MonoBehaviour {
         RenderRaycast();
     }
     
-
     private void RenderRaycast() {
 
         float targetLength = defaultLength;
-        RaycastHit hit = CreateRaycast(targetLength);
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, transform.forward);
 
         Vector3 endPosition = transform.position + (transform.forward * targetLength);
         dot.transform.position = endPosition;
 
-        
-        if (hit.collider != null) {
+        if (Physics.Raycast(ray, out hit, defaultLength)) {
+            lastHitTransform = hit.transform;
+            hit.transform.GetComponent<Renderer>().material.color = Color.red;
             endPosition = hit.point;
-
+        }
+        else {
+            lastHitTransform.GetComponent<Renderer>().material.color = Color.green;
         }
         
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, endPosition);
     }
-
-    private RaycastHit CreateRaycast(float length) {
-        RaycastHit hit;
-        Ray ray = new Ray(transform.position, transform.forward);
-        Physics.Raycast(ray, out hit, defaultLength);
-        return hit;
-    }
+    
 
 }
