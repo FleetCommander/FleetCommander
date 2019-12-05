@@ -9,8 +9,12 @@ public class RaycastSelection : MonoBehaviour {
 
     [SerializeField]
     private GameObject dot;
+
+	[SerializeField][Range(0.05f,0.3f)]
+	private float rayScaling = 0.1f;
+
     private Material material;
-    private float defaultLength = 5.0f;
+    private float targetLength = 5.0f;
     private LineRenderer lineRenderer = null;
     private Transform lastHitTransform;
 
@@ -20,19 +24,22 @@ public class RaycastSelection : MonoBehaviour {
     }
 
     void Update() {
-        RenderRaycast();
+        LaserPointer();
     }
     
-    private void RenderRaycast() {
+    private void LaserPointer() {
+       
 
-        float targetLength = defaultLength;
+		targetLength = targetLength + OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y * rayScaling ;
+
         RaycastHit hit;
         Ray ray = new Ray(transform.position, transform.forward);
 
         Vector3 endPosition = transform.position + (transform.forward * targetLength);
         dot.transform.position = endPosition;
 
-        if (Physics.Raycast(ray, out hit, defaultLength)) {
+        if (Physics.Raycast(ray, out hit, targetLength) && hit.transform.tag == SELECTABLE) {
+			
             lastHitTransform = hit.transform;
             hit.transform.GetComponent<Renderer>().material.color = Color.red;
             endPosition = hit.point;
