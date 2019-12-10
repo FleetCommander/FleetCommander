@@ -17,10 +17,13 @@ public class RaycastSelection : MonoBehaviour {
     private float targetLength = 5.0f;
     private LineRenderer lineRenderer = null;
     private Transform lastHitTransform;
-
-
+    
+    public Material invisible;
+    public GameObject go;
+ 
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
+        
     }
 
     void Update() {
@@ -29,23 +32,36 @@ public class RaycastSelection : MonoBehaviour {
     
     private void LaserPointer() {
        
-
+        
+        
 		targetLength = targetLength + OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y * rayScaling ;
-
+         if (targetLength <= 0) {
+            targetLength = 0;
+        }
+         
         RaycastHit hit;
         Ray ray = new Ray(transform.position, transform.forward);
 
         Vector3 endPosition = transform.position + (transform.forward * targetLength);
         dot.transform.position = endPosition;
-
+        
+        
         if (Physics.Raycast(ray, out hit, targetLength) && hit.transform.tag == SELECTABLE) {
-			
+            
             lastHitTransform = hit.transform;
-            hit.transform.GetComponent<Renderer>().material.color = Color.red;
+            hit.transform.GetComponent<Renderer>().material.SetFloat("_Outline", 0.2f);
+//          hit.transform.GetComponent<Renderer>().materials[1] = invisible;
+            go = hit.transform.gameObject;
             endPosition = hit.point;
+            
+            if (OVRInput.GetDown(OVRInput.Button.One)) {
+                go.GetComponent<Selected>().MySelection();
+            }
+            
         }
-        else {
-            lastHitTransform.GetComponent<Renderer>().material.color = Color.green;
+        else if (go.GetComponent<Selected>().isSelected == false) {
+            lastHitTransform.GetComponent<Renderer>().material.SetFloat("_Outline", 0);
+            
         }
         
         lineRenderer.SetPosition(0, transform.position);
