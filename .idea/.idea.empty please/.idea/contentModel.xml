@@ -672,7 +672,6 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Movement.cs" t="Include" />
           <e p="Plattformtrigger.cs" t="Include" />
           <e p="RaycastSelection.cs" t="Include" />
           <e p="Selected.cs" t="Include" />
