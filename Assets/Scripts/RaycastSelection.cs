@@ -51,7 +51,8 @@ public class RaycastSelection : MonoBehaviour {
                 hit.transform.GetComponent<Renderer>().materials[1].color = Color.clear;
             }
         }
-        else if (go.GetComponent<Selected>().isSelected == false) {
+        
+        else if (go != null && go.GetComponent<Selected>().isSelected == false) {
             lastHitTransform.GetComponent<Renderer>().material.SetFloat("_Outline", 0);
         }
 

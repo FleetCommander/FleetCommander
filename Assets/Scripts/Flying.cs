@@ -9,15 +9,9 @@ public class Flying : MonoBehaviour {
     private float turnAround;
     private bool invert = false;
     
-    // Start is called before the first frame update
-    void Start() {
-        
-    }
-
-    // Update is called once per frame
     void FixedUpdate() {
 
-        if (invert == true) {
+        if (invert) {
             // Thumbstick Taste gedrückt halten um zu nach vorner/hinten zu fliegen (seitwärts geht nicht).
             transform.position = transform.position + Camera.main.transform.forward *
                                  (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y * playerSpeed) * Time.deltaTime;
