@@ -8,6 +8,21 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="Asteroids Pack" t="Include">
+          <e p="Assets" t="Include">
+            <e p="Scripts" t="Include">
+              <e p="RandomRotator.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Fx Explosion Pack" t="Include">
+          <e p="Script" t="Include">
+            <e p="csDemoScenceControl.cs" t="Include" />
+            <e p="csLightControl.cs" t="Include" />
+            <e p="csMouseOrbit.cs" t="Include" />
+            <e p="DestroyEffect.cs" t="Include" />
+          </e>
+        </e>
         <e p="Oculus" t="Include">
           <e p="AudioManager" t="Include">
             <e p="Scenes" t="Include">
@@ -672,10 +687,25 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Flying.cs" t="Include" />
+          <e p="Collisions" t="Include">
+            <e p="CollisionTest.cs" t="Include" />
+            <e p="Explode.cs" t="Include" />
+          </e>
+          <e p="GameControls" t="Include">
+            <e p="GameControls.cs" t="Include" />
+            <e p="MainMenu.cs" t="Include" />
+            <e p="PauseMenu.cs" t="Include" />
+          </e>
+          <e p="Movements" t="Include">
+            <e p="Flying.cs" t="Include" />
+            <e p="MovementAsteroid.cs" t="Include" />
+            <e p="MovementPlane.cs" t="Include" />
+          </e>
           <e p="Plattformtrigger.cs" t="Include" />
-          <e p="RaycastSelection.cs" t="Include" />
-          <e p="Selected.cs" t="Include" />
+          <e p="Selection" t="Include">
+            <e p="RaycastSelection.cs" t="Include" />
+            <e p="Selected.cs" t="Include" />
+          </e>
         </e>
         <e p="Shaders" t="Include">
           <e p="Border.shader" t="Include" />

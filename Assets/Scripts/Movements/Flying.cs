@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Flying : MonoBehaviour {
     [SerializeField][Range(1,10)]
-    private float playerSpeed; // Geschwindigkeit anpassbar
+    private float playerSpeed = 10F; // Geschwindigkeit anpassbar
     
     private float turnAround;
     private bool invert = false;
