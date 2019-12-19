@@ -37,9 +37,24 @@ public class RaycastSelection : MonoBehaviour {
         Vector3 endPosition = transform.position + (transform.forward * raycastLength);
         dot.transform.position = endPosition;
         
+        if(OVRInput.GetDown(OVRInput.Button.Four)) {
+            int countShips = LastSelected.Count;
+            for (int i = 0; i <= countShips; i++) {
+                GameObject gotmp = LastSelected.Pop();
+                gotmp.GetComponent<Collider>().enabled = true;
+                gotmp.GetComponent<Selected>().MySelection();
+                gotmp.GetComponent<Renderer>().material.SetFloat("_Outline", 0);
+            }
+        }
+        
+        
+        
         if(OVRInput.GetDown(OVRInput.Button.Two)) {
 
-            LastSelected.Pop().GetComponent<Collider>().enabled = true;
+            GameObject gotmp = LastSelected.Pop();
+            gotmp.GetComponent<Collider>().enabled = true;
+            gotmp.GetComponent<Selected>().MySelection();
+            gotmp.GetComponent<Renderer>().material.SetFloat("_Outline", 0);
 
         }
 
@@ -54,7 +69,7 @@ public class RaycastSelection : MonoBehaviour {
             
             
 
-            if (OVRInput.GetDown(OVRInput.Button.One)) {
+            if (OVRInput.Get(OVRInput.Button.One)) {
                 go.GetComponent<Selected>().MySelection();
                 go.GetComponent<Collider>().enabled = false;
                 hit.transform.GetComponent<Renderer>().materials[1].color = Color.clear;
