@@ -9,15 +9,18 @@ public class RaycastSelection : MonoBehaviour {
     [SerializeField] private GameObject dot;
 
     [SerializeField] [Range(0.05f, 0.3f)] private float rayScalingSpeed = 0.1f;
-
+    
+    [SerializeField ] private Material invisiblemat;
+    
     private Material material;
     private float targetLength = 5.0f;
     private LineRenderer lineRenderer = null;
     private Transform lastHitTransform;
-    public Material invisible;
+    private Color standardcolor;
+    private Material[] material1;
     public GameObject go;
     public Stack<GameObject> LastSelected = new Stack<GameObject>();
-
+    public Stack<Material> StandardCol = new Stack<Material>();
     
     
     void Awake() {
@@ -41,9 +44,11 @@ public class RaycastSelection : MonoBehaviour {
             int countShips = LastSelected.Count;
             for (int i = 0; i <= countShips; i++) {
                 GameObject gotmp = LastSelected.Pop();
+                material1[1] = StandardCol.Pop();
                 gotmp.GetComponent<Collider>().enabled = true;
                 gotmp.GetComponent<Selected>().MySelection();
                 gotmp.GetComponent<Renderer>().material.SetFloat("_Outline", 0);
+                gotmp.transform.GetComponent<Renderer>().materials = material1;
             }
         }
         
@@ -52,17 +57,16 @@ public class RaycastSelection : MonoBehaviour {
         if(OVRInput.GetDown(OVRInput.Button.Two)) {
 
             GameObject gotmp = LastSelected.Pop();
+            material1[1] = StandardCol.Pop();
             gotmp.GetComponent<Collider>().enabled = true;
             gotmp.GetComponent<Selected>().MySelection();
             gotmp.GetComponent<Renderer>().material.SetFloat("_Outline", 0);
-
+            gotmp.transform.GetComponent<Renderer>().materials = material1;
         }
 
         if (Physics.Raycast(ray, out hit, raycastLength) && hit.transform.CompareTag(SELECTABLE)) {
             lastHitTransform = hit.transform;
             hit.transform.GetComponent<Renderer>().material.SetFloat("_Outline", 0.2f);
-//          hit.transform.GetComponent<Renderer>().materials[1] = invisible;
-            
             go = hit.transform.gameObject;
             endPosition = hit.point;
             
@@ -72,9 +76,15 @@ public class RaycastSelection : MonoBehaviour {
             if (OVRInput.Get(OVRInput.Button.One)) {
                 go.GetComponent<Selected>().MySelection();
                 go.GetComponent<Collider>().enabled = false;
-                hit.transform.GetComponent<Renderer>().materials[1].color = Color.clear;
+                material1 = hit.transform.GetComponent<MeshRenderer>().materials;
+                Material mat1 = material1[1];
+                StandardCol.Push(mat1);
+                material1[1] = invisiblemat;
+                hit.transform.GetComponent<MeshRenderer>().materials = material1;
+                //standardcolor = hit.transform.GetComponent<Renderer>().materials[1].color;
+                //hit.transform.GetComponent<Renderer>().materials[1].color = Color.clear;
                 LastSelected.Push(go);
-                }
+            }
         }
         
         else if (go != null && go.GetComponent<Selected>().isSelected == false) {

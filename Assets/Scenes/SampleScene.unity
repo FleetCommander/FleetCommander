@@ -76639,6 +76639,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Selectable
       objectReference: {fileID: 0}
+    - target: {fileID: 1741139820255028, guid: 7861019a7b8cb6f4db5310695263b29a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4172660377238974, guid: 7861019a7b8cb6f4db5310695263b29a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.25
@@ -76698,6 +76702,21 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 122e4775779e9554c8a80a33c97aad0f, type: 2}
+    - target: {fileID: 23329964076036706, guid: 7861019a7b8cb6f4db5310695263b29a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23329964076036706, guid: 7861019a7b8cb6f4db5310695263b29a,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23329964076036706, guid: 7861019a7b8cb6f4db5310695263b29a,
+        type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7861019a7b8cb6f4db5310695263b29a, type: 3}
 --- !u!1001 &1915140788
@@ -92061,5 +92080,20 @@ PrefabInstance:
       propertyPath: go
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5425431859472149193, guid: 9537520f372d67747b9b831771add355,
+        type: 3}
+      propertyPath: standardmats
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e9aebb779ae4fb44b1153e847083ea0, type: 2}
+    - target: {fileID: 5425431859472149193, guid: 9537520f372d67747b9b831771add355,
+        type: 3}
+      propertyPath: invisiblemat
+      value: 
+      objectReference: {fileID: 2100000, guid: 8e9aebb779ae4fb44b1153e847083ea0, type: 2}
+    - target: {fileID: 5425431859472149193, guid: 9537520f372d67747b9b831771add355,
+        type: 3}
+      propertyPath: standardmat
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a0ff067fa651004b8447b29a0092251, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9537520f372d67747b9b831771add355, type: 3}
