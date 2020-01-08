@@ -5,6 +5,10 @@ using UnityEngine;
 public class Selected : MonoBehaviour {
     
     public bool isSelected;
+
+    public bool getSelected() {
+        return isSelected;
+    }
     // Start is called before the first frame update
     void Start() {
         isSelected = false;

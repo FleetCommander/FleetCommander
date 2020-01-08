@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionTest : MonoBehaviour
-{
+public class CollisionTest : MonoBehaviour {
+  
     private void OnTriggerEnter(Collider other) {
-        Debug.Log(gameObject.name + "Neeeeeee" + other.gameObject.name);
+
+        var plane = gameObject.GetComponent<Renderer>();
+        var destroy = other.gameObject.GetComponent<Renderer>();
         
-        Destroy(gameObject);
+        if (plane.sharedMaterial.color == destroy.sharedMaterial.color) {
+            Destroy(gameObject);
+        }
     }
 }

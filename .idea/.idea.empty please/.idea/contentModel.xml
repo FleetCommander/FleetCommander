@@ -702,6 +702,12 @@
             <e p="MovementPlane.cs" t="Include" />
           </e>
           <e p="Plattformtrigger.cs" t="Include" />
+          <e p="Scores" t="Include">
+            <e p="IntVariable.cs" t="Include" />
+            <e p="IntVariableEventAdapter.cs" t="Include" />
+            <e p="TextSetter.cs" t="Include" />
+            <e p="UnityEventInt.cs" t="Include" />
+          </e>
           <e p="Selection" t="Include">
             <e p="RaycastSelection.cs" t="Include" />
             <e p="Selected.cs" t="Include" />

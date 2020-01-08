@@ -7,9 +7,10 @@ public class MovementPlane : MonoBehaviour
     
 // Geschwindigkeitsanpassungen schneller, bzw langsamer (per Knopfdruck)
 
-    private float speed = 1f;
+    private float speed = 10f;
 
     void Update() {
+        
         transform.position += transform.forward * Time.deltaTime * speed;
     }
 }
