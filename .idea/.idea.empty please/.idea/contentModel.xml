@@ -701,6 +701,9 @@
             <e p="MovementAsteroid.cs" t="Include" />
             <e p="MovementPlane.cs" t="Include" />
           </e>
+          <e p="Navigation" t="Include">
+            <e p="Navigation.cs" t="Include" />
+          </e>
           <e p="Plattformtrigger.cs" t="Include" />
           <e p="Scores" t="Include">
             <e p="IntVariable.cs" t="Include" />
