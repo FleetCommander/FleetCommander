@@ -6,7 +6,7 @@ using UnityEngine;
 public class RaycastSelection : MonoBehaviour {
     private const string SELECTABLE = "Selectable";
 
-    [SerializeField] private GameObject dot;
+    
 
     [SerializeField] [Range(0.05f, 0.3f)] private float rayScalingSpeed = 0.1f;
     
@@ -38,7 +38,6 @@ public class RaycastSelection : MonoBehaviour {
 
         int raycastLength = 5000;
         Vector3 endPosition = transform.position + (transform.forward * raycastLength);
-        dot.transform.position = endPosition;
         
         if(OVRInput.GetDown(OVRInput.Button.Four)) {
             int countShips = LastSelected.Count;
