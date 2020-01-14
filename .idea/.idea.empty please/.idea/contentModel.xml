@@ -719,6 +719,7 @@
             <e p="RaycastSelection.cs" t="Include" />
             <e p="Selected.cs" t="Include" />
           </e>
+          <e p="ShipMovement.cs" t="Include" />
         </e>
         <e p="Shaders" t="Include">
           <e p="Border.shader" t="Include" />

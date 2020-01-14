@@ -18,9 +18,12 @@ public class RaycastSelection : MonoBehaviour {
     private Transform lastHitTransform;
     private Color standardcolor;
     private Material[] material1;
+    private float buttonDownTimer;
+    private float delay = 1f;
     public GameObject go;
     public Stack<GameObject> LastSelected = new Stack<GameObject>();
     public Stack<Material> StandardCol = new Stack<Material>();
+    public Vector3 endPosition;
     
     
     void Awake() {
@@ -37,7 +40,7 @@ public class RaycastSelection : MonoBehaviour {
         Ray ray = new Ray(transform.position, transform.forward);
 
         int raycastLength = 5000;
-        Vector3 endPosition = transform.position + (transform.forward * raycastLength);
+        endPosition = transform.position + (transform.forward * raycastLength);
         
         if(OVRInput.GetDown(OVRInput.Button.Four)) {
             int countShips = LastSelected.Count;
@@ -68,11 +71,11 @@ public class RaycastSelection : MonoBehaviour {
             hit.transform.GetComponent<Renderer>().material.SetFloat("_Outline", 0.2f);
             go = hit.transform.gameObject;
             endPosition = hit.point;
-            
-            
-            
 
-            if (OVRInput.Get(OVRInput.Button.One)) {
+
+
+            if (OVRInput.GetDown(OVRInput.Button.One)) {
+                
                 go.GetComponent<Selected>().MySelection();
                 go.GetComponent<Collider>().enabled = false;
                 material1 = hit.transform.GetComponent<MeshRenderer>().materials;
@@ -83,6 +86,20 @@ public class RaycastSelection : MonoBehaviour {
                 //standardcolor = hit.transform.GetComponent<Renderer>().materials[1].color;
                 //hit.transform.GetComponent<Renderer>().materials[1].color = Color.clear;
                 LastSelected.Push(go);
+            }
+            
+            if (OVRInput.Get(OVRInput.Button.One)) {
+                    buttonDownTimer += Time.deltaTime;
+                    if (buttonDownTimer > delay) {
+                        go.GetComponent<Selected>().MySelection();
+                        go.GetComponent<Collider>().enabled = false;
+                        material1 = hit.transform.GetComponent<MeshRenderer>().materials;
+                        Material mat1 = material1[1];
+                        StandardCol.Push(mat1);
+                        material1[1] = invisiblemat;
+                        hit.transform.GetComponent<MeshRenderer>().materials = material1;
+                        LastSelected.Push(go); 
+                    }
             }
         }
         
