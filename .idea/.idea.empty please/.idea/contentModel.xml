@@ -693,7 +693,6 @@
           <e p="AddInvertedMeshCollider.cs" t="Include" />
           <e p="Collisions" t="Include">
             <e p="CollisionTest.cs" t="Include" />
-            <e p="Explode.cs" t="Include" />
           </e>
           <e p="GameControls" t="Include">
             <e p="GameControls.cs" t="Include" />
