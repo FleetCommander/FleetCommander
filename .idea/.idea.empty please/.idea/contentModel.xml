@@ -699,6 +699,8 @@
             <e p="MainMenu.cs" t="Include" />
             <e p="PauseMenu.cs" t="Include" />
           </e>
+          <e p="ModeChangedEvent.cs" t="Include" />
+          <e p="Modes.cs" t="Include" />
           <e p="Movements" t="Include">
             <e p="Flying.cs" t="Include" />
             <e p="MovementAsteroid.cs" t="Include" />
@@ -715,7 +717,7 @@
             <e p="UnityEventInt.cs" t="Include" />
           </e>
           <e p="Selection" t="Include">
-            <e p="RaycastSelection.cs" t="Include" />
+            <e p="LaserMethod.cs" t="Include" />
             <e p="Selected.cs" t="Include" />
           </e>
           <e p="ShipMovement.cs" t="Include" />
@@ -746,6 +748,7 @@
             </e>
           </e>
         </e>
+        <e p="Visibility.cs" t="Include" />
       </e>
       <e p="empty please.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />

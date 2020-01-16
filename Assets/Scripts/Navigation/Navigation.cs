@@ -60,8 +60,8 @@ public class Navigation : MonoBehaviour {
     void targetClick() {
         if (OVRInput.GetDown(OVRInput.Button.One)) {
             GameObject laser = GameObject.Find("Laser");
-            RaycastSelection rayCast = laser.GetComponent<RaycastSelection>();
-            targetPosition = rayCast.endPosition;
+            LaserMethod laserMethod = laser.GetComponent<LaserMethod>();
+            targetPosition = laserMethod.endPosition;
             targethit = true;
             
             Debug.Log(targethit);
