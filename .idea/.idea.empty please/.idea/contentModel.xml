@@ -696,13 +696,10 @@
           </e>
           <e p="GameControls" t="Include">
             <e p="GameControls.cs" t="Include" />
-            <e p="MainMenu.cs" t="Include" />
-            <e p="PauseMenu.cs" t="Include" />
           </e>
           <e p="ModeChangedEvent.cs" t="Include" />
           <e p="Modes.cs" t="Include" />
           <e p="Movements" t="Include">
-            <e p="Flying.cs" t="Include" />
             <e p="MovementAsteroid.cs" t="Include" />
             <e p="MovementPlane.cs" t="Include" />
           </e>

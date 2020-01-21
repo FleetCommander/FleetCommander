@@ -6,11 +6,11 @@ public class Visibility : MonoBehaviour {
 
     public void ToggleVisibility(Modes mode) {
         if (mode == Modes.SELECTION) {
-            gameObject.SetActive(false);
+             gameObject.GetComponent<Renderer>().enabled = false;
         }
 
         if (mode == Modes.NAVIGATION) {
-            gameObject.SetActive(true);
+            gameObject.GetComponent<Renderer>().enabled = true;
         }
     }
 

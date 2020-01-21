@@ -59,7 +59,7 @@ public class LaserMethod : MonoBehaviour {
         if (mode == Modes.SELECTION) {
             mode = Modes.NAVIGATION;
         }
-        else {
+        else if (mode == Modes.NAVIGATION) {
             mode = Modes.SELECTION;
         }
 
@@ -73,10 +73,6 @@ public class LaserMethod : MonoBehaviour {
 
         int raycastLength = 5000;
         endPosition = transform.position + (transform.forward * raycastLength);
-
-        
-        
-        
         
         
         if (Physics.Raycast(ray, out hit, raycastLength) && hit.transform.CompareTag(SELECTABLE)) {

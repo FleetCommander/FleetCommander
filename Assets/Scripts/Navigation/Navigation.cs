@@ -26,8 +26,7 @@ public class Navigation : MonoBehaviour {
     void Start() {
         
     }
-
-    // Update is called once per frame
+    
     void Update() {
         targetClick();
 //        if (OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.LTouch) > 0.5f) {
@@ -64,7 +63,6 @@ public class Navigation : MonoBehaviour {
             targetPosition = laserMethod.endPosition;
             targethit = true;
             
-            Debug.Log(targethit);
         }
     }
 }
