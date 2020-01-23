@@ -718,6 +718,7 @@
             <e p="Selected.cs" t="Include" />
           </e>
           <e p="ShipMovement.cs" t="Include" />
+          <e p="TargetPositionEvent.cs" t="Include" />
         </e>
         <e p="Shaders" t="Include">
           <e p="Border.shader" t="Include" />
