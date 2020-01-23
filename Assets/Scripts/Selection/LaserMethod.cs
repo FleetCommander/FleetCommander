@@ -18,7 +18,6 @@ public class LaserMethod : MonoBehaviour {
     [SerializeField] private Material invisiblemat;
     [SerializeField] private ModeChangedEvent modeChanged;
 
-
     private static readonly int Outline = Shader.PropertyToID("_Outline");
     private const string SELECTABLE = "Selectable";
 
@@ -89,11 +88,13 @@ public class LaserMethod : MonoBehaviour {
     }
 
     private void LaserOnSelectable(RaycastHit hit) {
+        
         lastHitTransform = hit.transform;
         hit.transform.GetComponent<Renderer>().material.SetFloat(Outline, 0.2f);
         go = hit.transform.gameObject;
         endPosition = hit.point;
 
+        
 
         if (OVRInput.GetDown(OVRInput.Button.One)) {
             go.GetComponent<Selected>().MySelection();
@@ -107,6 +108,7 @@ public class LaserMethod : MonoBehaviour {
             //hit.transform.GetComponent<Renderer>().materials[1].color = Color.clear;
             lastSelectedStack.Push(go);
         }
+        
 
         if (OVRInput.Get(OVRInput.Button.One)) {
             buttonDownTimer += Time.deltaTime;
@@ -117,7 +119,7 @@ public class LaserMethod : MonoBehaviour {
                 Material mat1 = material1[1];
                 standardCol.Push(mat1);
                 material1[1] = invisiblemat;
-                hit.transform.GetComponent<MeshRenderer>().materials = material1;
+                //  hit.transform.GetComponent<MeshRenderer>().materials = material1;
                 lastSelectedStack.Push(go);
             }
         }

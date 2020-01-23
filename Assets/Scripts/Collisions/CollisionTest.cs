@@ -22,10 +22,10 @@ public class CollisionTest : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        var plane = gameObject.GetComponent<Renderer>();
-        var destroy = other.gameObject.GetComponent<Renderer>();
+        var plane = gameObject.GetComponent<Renderer>().materials;
+        var destroy = other.gameObject.GetComponent<Renderer>().materials;
         
-        if (plane.sharedMaterial.color.Equals(destroy.sharedMaterial.color)) {
+        if (plane[1].Equals(destroy[1])) {
             Destroy(gameObject);
                 _score.Value++;
             }
