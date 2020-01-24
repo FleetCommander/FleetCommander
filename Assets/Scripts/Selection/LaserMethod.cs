@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -11,6 +12,7 @@ public class LaserMethod : MonoBehaviour {
     [SerializeField] private Modes mode = Modes.SELECTION;
     [SerializeField] [Range(2f, 10f)] private float bobbelSpeed = 2f;
     [SerializeField] private GameObject bobbel;
+    [SerializeField] private GameObject bobbelSelection;
     [SerializeField] private Material invisiblemat;
     [FormerlySerializedAs("endPosition")] public Vector3 rayCastEndPosition;
     [SerializeField] private ModeChangedEvent modeChanged;
@@ -27,22 +29,26 @@ public class LaserMethod : MonoBehaviour {
     private LineRenderer lineRenderer;
     private Transform lastHitTransform;
     private Color standardcolor;
-    private Material[] material1;
+    private Material[] materials;
     private float buttonDownTimer;
     private float delay = 1f;
     private Renderer bobbelRenderer;
-
+    private Renderer bobbelSelectionRenderer;
 
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
         bobbel.transform.position = transform.position;
         bobbelRenderer = bobbel.GetComponent<Renderer>();
-        
+        bobbelSelectionRenderer = bobbelSelection.GetComponent<Renderer>();
+
     }
 
     void Update() {
         bobbelRenderer.enabled = (mode == Modes.NAVIGATION);
         bobbel.transform.localScale = CalcScale(bobbel.transform.position - transform.position);
+
+        bobbelSelectionRenderer.enabled = (mode == Modes.BUBBLESELECTION);
+        //bobbelSelection.transform.localScale = CalcScale(bobbelSelection.transform.position - transform.position);
 
         if (OVRInput.GetDown(OVRInput.Button.Start)) {
             ToggleModeAndInvokeEvent();
@@ -69,6 +75,9 @@ public class LaserMethod : MonoBehaviour {
             mode = Modes.NAVIGATION;
         }
         else if (mode == Modes.NAVIGATION) {
+            mode = Modes.BUBBLESELECTION;
+        }
+        else if (mode == Modes.BUBBLESELECTION) {
             mode = Modes.SELECTION;
         }
 
@@ -94,6 +103,10 @@ public class LaserMethod : MonoBehaviour {
 
         if (mode == Modes.NAVIGATION) {
             navigationBobble();
+        }
+
+        if (mode == Modes.BUBBLESELECTION) {
+            bubbleSel();
         }
 
 
@@ -126,6 +139,33 @@ public class LaserMethod : MonoBehaviour {
         }
 
         if (OVRInput.GetDown(OVRInput.Button.One)) {
+
+
+            //DeselectLast();
+            
+
+
+            int countShips = lastSelectedStack.Count;
+            for (int i = 0; i <= countShips; i++) {
+                GameObject lastSelected = lastSelectedStack.Pop();
+                materials[1] = standardCol.Pop();
+                lastSelected.GetComponent<Collider>().enabled = true;
+                lastSelected.GetComponent<Selected>().MySelection();
+                lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0.2f);
+                lastSelected.transform.GetComponent<Renderer>().materials = materials;
+                
+                Vector3 targetPosition = bobbel.transform.position;
+                lastSelected.GetComponent<ShipMovement>().targetPosition = targetPosition;
+            }
+            
+            
+          
+            
+            
+            
+            
+            
+            
             targetPositionEvent.Invoke(bobbel.transform.position);
         }
     }
@@ -136,43 +176,36 @@ public class LaserMethod : MonoBehaviour {
         go = hit.transform.gameObject;
         rayCastEndPosition = hit.point;
 
-
-        if (OVRInput.GetDown(OVRInput.Button.One)) {
-            go.GetComponent<Selected>().MySelection();
-            go.GetComponent<Collider>().enabled = false;
-            material1 = hit.transform.GetComponent<MeshRenderer>().materials;
-            Material mat1 = material1[1];
-            standardCol.Push(mat1);
-            material1[1] = invisiblemat;
-            hit.transform.GetComponent<MeshRenderer>().materials = material1;
-            //standardcolor = hit.transform.GetComponent<Renderer>().materials[1].color;
-            //hit.transform.GetComponent<Renderer>().materials[1].color = Color.clear;
-            lastSelectedStack.Push(go);
-        }
+        
 
 
         if (OVRInput.Get(OVRInput.Button.One)) {
-            buttonDownTimer += Time.deltaTime;
-            if (buttonDownTimer > delay) {
+            
+            if (buttonDownTimer == 0 || buttonDownTimer > delay) {
                 go.GetComponent<Selected>().MySelection();
                 go.GetComponent<Collider>().enabled = false;
-                material1 = hit.transform.GetComponent<MeshRenderer>().materials;
-                Material mat1 = material1[1];
+                materials = hit.transform.GetComponent<MeshRenderer>().materials;
+                Material mat1 = materials[1];
                 standardCol.Push(mat1);
-                material1[1] = invisiblemat;
-                //  hit.transform.GetComponent<MeshRenderer>().materials = material1;
+                materials[1] = invisiblemat;
+                hit.transform.GetComponent<MeshRenderer>().materials = materials;
                 lastSelectedStack.Push(go);
             }
+            buttonDownTimer += Time.deltaTime;
+
+        }
+        else {
+            buttonDownTimer = 0;
         }
     }
 
     private void DeselectLast() {
         GameObject lastSelected = lastSelectedStack.Pop();
-        material1[1] = standardCol.Pop();
+        materials[1] = standardCol.Pop();
         lastSelected.GetComponent<Collider>().enabled = true;
         lastSelected.GetComponent<Selected>().MySelection();
         lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0);
-        lastSelected.transform.GetComponent<Renderer>().materials = material1;
+        lastSelected.transform.GetComponent<Renderer>().materials = materials;
     }
 
     private void DeselectAll() {
@@ -187,5 +220,50 @@ public class LaserMethod : MonoBehaviour {
         if (targetLength <= 0) {
             targetLength = 0;
         }
+    }
+
+    public void bubbleSel() {
+        
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y > 0.8 ||
+            OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y < -0.8) {
+            bobbelSpeed += 5f;
+        }
+        else {
+            bobbelSpeed = 2f;
+        }
+
+        float threshold = (bobbelSelection.transform.position +
+                           bobbelSpeed * OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y *
+                           (rayCastEndPosition - bobbelSelection.transform.position).normalized - transform.position).magnitude;
+
+
+        float threshold2 = (bobbelSelection.transform.localScale +
+                           new Vector3(1, 1, 1 * OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y)).x;
+            
+            
+        var limit = 2;
+        if (threshold >= limit) {
+            bobbelSelection.transform.position += bobbelSpeed * OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y *
+                                         (rayCastEndPosition - bobbelSelection.transform.position).normalized;
+        }
+        else {
+            bobbelSelection.transform.position =
+                transform.position + (rayCastEndPosition - bobbelSelection.transform.position).normalized * limit;
+        }
+
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y > 0.5) {
+
+            if (threshold2 < (rayCastEndPosition - bobbelSelection.transform.position).magnitude) {
+                bobbelSelection.transform.localScale += new Vector3(1, 1, 1 * OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y) ;
+            }
+            
+
+        }
+        
+        
+
+       
+        
+        
     }
 }

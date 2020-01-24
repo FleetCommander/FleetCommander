@@ -10,8 +10,7 @@ public class CollisionTest : MonoBehaviour {
     [SerializeField] private IntVariable _score;
     private Vector3 _startPosition;
     
-    private void Start()
-    {
+    private void Awake() {
         _startPosition = transform.position;
         _score.Value = 0;
     }

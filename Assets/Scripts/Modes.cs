@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Modes {
-    SELECTION, NAVIGATION
+    SELECTION, NAVIGATION, BUBBLESELECTION
 }
     
 

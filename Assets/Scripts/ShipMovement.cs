@@ -4,25 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipMovement : MonoBehaviour {
-    private float speed = 10f;
+    private float speed = 0.1f;
     private float rotationSpeed = 0.3f;
-    private Vector3 targetPosition;
+    private float step;
+    public Vector3 targetPosition;
     [SerializeField] private bool isSelected = false;
     [SerializeField] private Selected select;
     [SerializeField] private bool targethit = false;
-
+    private UfoColors ufoColors;
+    
     public void Awake() {
+        if (GetComponent<Renderer>().material.name.Equals("RED")) {
+            ufoColors = UfoColors.RED;
+        }
         select = GetComponent<Selected>();
+        targetPosition = transform.position;
     }
     
     void Update() {
-        GameObject naviObject = GameObject.Find("Navigation Sphere");
+      /*  GameObject naviObject = GameObject.Find("Navigation Sphere");
         Navigation navi = naviObject.GetComponent<Navigation>();
         targetPosition = navi.targetPosition;
         targethit = navi.targethit;
         isSelected = @select.isSelected;
         if(targethit && isSelected)
             Movement();
+        */
+
+      move();
+
+
     }
 
     public void Movement() {
@@ -34,4 +45,20 @@ public class ShipMovement : MonoBehaviour {
             rotationSpeed = 0;
         }
     }
+
+
+    public void move() {
+
+        if (transform.position != targetPosition) {
+            step += 0.0004f;
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);    
+        }
+        else {
+            step = 0.1f;
+        }
+
+
+
+    }
+
 }
