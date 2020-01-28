@@ -19500,7 +19500,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1729573189}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &476875839
 GameObject:
@@ -19700,7 +19700,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 0}
-  _score: {fileID: 0}
 --- !u!114 &494654176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24543,55 +24542,6 @@ Transform:
   m_Father: {fileID: 2065140401}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &557492537
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 557492539}
-  - component: {fileID: 557492538}
-  m_Layer: 0
-  m_Name: GameControls
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &557492538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557492537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6460854570a5c044eba0d76c6c4ba9c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _onGamePause:
-    m_PersistentCalls:
-      m_Calls: []
-  _onGameResume:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!4 &557492539
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 557492537}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24.880556, y: 25.65134, z: 20.19007}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1729573189}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &616672912
 GameObject:
   m_ObjectHideFlags: 0
@@ -24805,7 +24755,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747841806}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -24827,7 +24777,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5953a6e817e87be4195c31da8fdce334, type: 2}
+  - {fileID: 2100000, guid: 81bdfb8bfc06ee245b6d89ffe872fc6a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -24962,6 +24912,41 @@ Transform:
   m_Father: {fileID: 45075841}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &830950266 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4130828811110244473, guid: ac676efc9758e3b4db4b3be4896ead61,
+    type: 3}
+  m_PrefabInstance: {fileID: 1486173606}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &830950267
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830950266}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &830950273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830950266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df205a3af9d58ca46a08eb4caae93bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 0}
 --- !u!114 &839698752 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5425431859472149193, guid: 9537520f372d67747b9b831771add355,
@@ -25117,7 +25102,6 @@ GameObject:
   - component: {fileID: 1210388732}
   - component: {fileID: 1210388731}
   - component: {fileID: 1210388730}
-  - component: {fileID: 1210388734}
   - component: {fileID: 1210388735}
   m_Layer: 0
   m_Name: Green Goal Collision Detector
@@ -25199,22 +25183,6 @@ Transform:
   m_Father: {fileID: 2065140401}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1210388734
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210388729}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &1210388735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25265,7 +25233,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 0}
-  _score: {fileID: 0}
 --- !u!114 &1270707213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25597,17 +25564,17 @@ PrefabInstance:
     - target: {fileID: 1211066423261408808, guid: ac676efc9758e3b4db4b3be4896ead61,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1211066423261408808, guid: ac676efc9758e3b4db4b3be4896ead61,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1211066423261408808, guid: ac676efc9758e3b4db4b3be4896ead61,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1211066423261408808, guid: ac676efc9758e3b4db4b3be4896ead61,
         type: 3}
@@ -25651,6 +25618,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6282552505765618131, guid: ac676efc9758e3b4db4b3be4896ead61,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6282552505765618131, guid: ac676efc9758e3b4db4b3be4896ead61,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 525403371}
@@ -25659,6 +25631,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 980750234}
+    - target: {fileID: 6282552505765618131, guid: ac676efc9758e3b4db4b3be4896ead61,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 584662273d60a0f47bd7fecbb570e66e, type: 2}
     - target: {fileID: 5334226549472838031, guid: ac676efc9758e3b4db4b3be4896ead61,
         type: 3}
       propertyPath: ufoColors
@@ -30536,7 +30513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606416791}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 98.26252, y: 46.12453, z: 65.58545}
+  m_LocalPosition: {x: 10, y: 10, z: 61}
   m_LocalScale: {x: 1, y: 1, z: 8}
   m_Children:
   - {fileID: 121366383}
@@ -30722,7 +30699,6 @@ Transform:
   - {fileID: 705507995}
   - {fileID: 476875843}
   - {fileID: 1845085428}
-  - {fileID: 557492539}
   - {fileID: 463680968}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -30758,7 +30734,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 0}
-  _score: {fileID: 0}
 --- !u!114 &1831136285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40601,7 +40576,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 0}
-  _score: {fileID: 0}
 --- !u!114 &2068316378
 MonoBehaviour:
   m_ObjectHideFlags: 0

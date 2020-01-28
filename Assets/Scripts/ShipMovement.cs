@@ -30,16 +30,26 @@ public class ShipMovement : MonoBehaviour {
         if(targethit && isSelected)
             Movement();
         */
-
+      
       move();
 
 
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        var plane = gameObject.GetComponent<Renderer>().materials;
+        var destroy = other.gameObject.GetComponent<Renderer>().materials;
+        
+        if (plane[1].Equals(destroy[0])) {
+            Destroy(gameObject);
+        }
     }
 
     public void Movement() {
         transform.position += transform.forward * Time.deltaTime * speed;
         var targetrotation = Quaternion.LookRotation(targetPosition - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetrotation, rotationSpeed * Time.deltaTime);
+        
         if (transform.position == targetPosition) {
             speed = 0;
             rotationSpeed = 0;
