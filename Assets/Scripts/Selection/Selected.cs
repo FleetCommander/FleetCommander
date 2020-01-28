@@ -17,7 +17,7 @@ public class Selected : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-       
+        
     }
 
     public void MySelection() {

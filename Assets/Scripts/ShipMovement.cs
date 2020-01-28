@@ -10,7 +10,7 @@ public class ShipMovement : MonoBehaviour {
     public Vector3 targetPosition;
     [SerializeField] private bool isSelected = false;
     [SerializeField] private Selected select;
-    [SerializeField] private bool targethit = false;
+    [SerializeField] public bool targethit = false;
     private UfoColors ufoColors;
     
     public void Awake() {
@@ -18,22 +18,16 @@ public class ShipMovement : MonoBehaviour {
             ufoColors = UfoColors.RED;
         }
         select = GetComponent<Selected>();
-        targetPosition = transform.position;
     }
-    
+
     void Update() {
-      /*  GameObject naviObject = GameObject.Find("Navigation Sphere");
-        Navigation navi = naviObject.GetComponent<Navigation>();
-        targetPosition = navi.targetPosition;
-        targethit = navi.targethit;
+        /*GameObject laser = GameObject.Find("Laser");
+        LaserMethod laserMethod = laser.GetComponent<LaserMethod>();
+        targethit = laserMethod.targethit;
+        */
         isSelected = @select.isSelected;
         if(targethit && isSelected)
-            Movement();
-        */
-      
-      move();
-
-
+            move();
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -58,17 +52,15 @@ public class ShipMovement : MonoBehaviour {
 
 
     public void move() {
-
         if (transform.position != targetPosition) {
             step += 0.0004f;
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);    
         }
         else {
             step = 0.1f;
+            targethit = false;
+            @select.MySelection();
         }
-
-
-
     }
 
 }
