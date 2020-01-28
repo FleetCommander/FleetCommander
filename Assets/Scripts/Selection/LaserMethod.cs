@@ -147,15 +147,18 @@ public class LaserMethod : MonoBehaviour {
 
             int countShips = lastSelectedStack.Count;
             for (int i = 0; i <= countShips; i++) {
-                GameObject lastSelected = lastSelectedStack.Pop();
-                materials[1] = standardCol.Pop();
-                lastSelected.GetComponent<Collider>().enabled = true;
-                lastSelected.GetComponent<Selected>().MySelection();
-                lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0.2f);
-                lastSelected.transform.GetComponent<Renderer>().materials = materials;
-                
-                Vector3 targetPosition = bobbel.transform.position;
-                lastSelected.GetComponent<ShipMovement>().targetPosition = targetPosition;
+                GameObject lastSelected = new GameObject();
+                if (standardCol.Count != 0) {
+                    lastSelected = lastSelectedStack.Pop();
+                    materials[1] = standardCol.Pop();
+                    lastSelected.GetComponent<Collider>().enabled = true;
+                    lastSelected.GetComponent<Selected>().MySelection();
+                    lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0.2f);
+                    lastSelected.transform.GetComponent<Renderer>().materials = materials;
+                    
+                    Vector3 targetPosition = bobbel.transform.position;
+                    lastSelected.GetComponent<ShipMovement>().targetPosition = targetPosition;
+                }
             }
             
             
@@ -200,12 +203,15 @@ public class LaserMethod : MonoBehaviour {
     }
 
     private void DeselectLast() {
-        GameObject lastSelected = lastSelectedStack.Pop();
-        materials[1] = standardCol.Pop();
-        lastSelected.GetComponent<Collider>().enabled = true;
-        lastSelected.GetComponent<Selected>().MySelection();
-        lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0);
-        lastSelected.transform.GetComponent<Renderer>().materials = materials;
+        GameObject lastSelected = new GameObject();
+        if (standardCol.Count != 0) {
+            lastSelected = lastSelectedStack.Pop();
+            materials[1] = standardCol.Pop();
+            lastSelected.GetComponent<Collider>().enabled = true;
+            lastSelected.GetComponent<Selected>().MySelection();
+            lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0);
+            lastSelected.transform.GetComponent<Renderer>().materials = materials;
+        }
     }
 
     private void DeselectAll() {

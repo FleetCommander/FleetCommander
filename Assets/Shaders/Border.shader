@@ -2,7 +2,7 @@
 
 Shader "Outlined/Silhouette Only" {
     Properties {
-        _OutlineColor ("Outline Color", Color) = (0,0,0,1)
+        _Color ("Outline Color", Color) = (0,0,0,1)
         _Outline ("Outline width", Range (0.0, 0.2)) = .005
     }
  
@@ -20,7 +20,7 @@ struct v2f {
 };
  
 uniform float _Outline;
-uniform float4 _OutlineColor;
+uniform float4 _Color;
  
 v2f vert(appdata v) {
     // just make a copy of incoming vertex data but scaled according to normal direction
@@ -31,7 +31,7 @@ v2f vert(appdata v) {
     float2 offset = TransformViewToProjection(norm.xy);
  
     o.pos.xy += offset * o.pos.z * _Outline;
-    o.color = _OutlineColor;
+    o.color = _Color;
     return o;
 }
 ENDCG
@@ -47,7 +47,7 @@ ENDCG
             // uncomment this to hide inner details:
             //Offset -8, -8
  
-            SetTexture [_OutlineColor] {
+            SetTexture [_Color] {
                 ConstantColor (0,0,0,0)
                 Combine constant
             }

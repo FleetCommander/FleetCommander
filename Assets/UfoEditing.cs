@@ -12,16 +12,29 @@ public class UfoEditing : MonoBehaviour {
     private Color color;
     
     // Update is called once per frame
+    void Awake() {
+        switch (ufoColors) {
+            case UfoColors.RED:
+                GetComponentInChildren<Renderer>().materials[1].color = Color.red;
+                break;
+            case UfoColors.YELLOW:
+                GetComponentInChildren<Renderer>().materials[1].color = Color.yellow;
+                break;
+            case UfoColors.BLUE:
+                GetComponentInChildren<Renderer>().materials[1].color = Color.blue;
+                break;
+        }
+    }
     void Update() {
         switch (ufoColors) {
             case UfoColors.RED:
-                GetComponentInChildren<Renderer>().sharedMaterials[1].color = Color.red;
+                GetComponentInChildren<Renderer>().material.color = Color.red;
                 break;
             case UfoColors.YELLOW:
-                GetComponentInChildren<Renderer>().sharedMaterials[1].color = Color.yellow;
+                GetComponentInChildren<Renderer>().material.color = Color.yellow;
                 break;
             case UfoColors.BLUE:
-                GetComponentInChildren<Renderer>().sharedMaterials[1].color = Color.blue;
+                GetComponentInChildren<Renderer>().material.color = Color.blue;
                 break;
         }
     }
