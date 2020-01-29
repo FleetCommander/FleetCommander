@@ -21,38 +21,11 @@ public class ShipMovement : MonoBehaviour {
     }
 
     void Update() {
-        /*GameObject laser = GameObject.Find("Laser");
-        LaserMethod laserMethod = laser.GetComponent<LaserMethod>();
-        targethit = laserMethod.targethit;
-        */
         isSelected = @select.isSelected;
         if(targethit && isSelected)
             move();
     }
-
-    /*
-    private void OnTriggerEnter(Collider other) {
-        var plane = gameObject.GetComponent<Renderer>().materials;
-        var destroy = other.gameObject.GetComponent<Renderer>().materials;
-        
-        if (plane[1].Equals(destroy[0])) {
-            Destroy(gameObject);
-        }
-    }
-    */
-
-    public void Movement() {
-        transform.position += transform.forward * Time.deltaTime * speed;
-        var targetrotation = Quaternion.LookRotation(targetPosition - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetrotation, rotationSpeed * Time.deltaTime);
-        
-        if (transform.position == targetPosition) {
-            speed = 0;
-            rotationSpeed = 0;
-        }
-    }
-
-
+   
     public void move() {
         if (transform.position != targetPosition) {
             step += 0.0004f;
@@ -64,5 +37,27 @@ public class ShipMovement : MonoBehaviour {
             @select.MySelection();
         }
     }
-
 }
+
+
+
+
+
+/*
+Movement für smoothen Raumschiffmovement
+public void Movement() {
+    transform.position += transform.forward * Time.deltaTime * speed;
+    var targetrotation = Quaternion.LookRotation(targetPosition - transform.position);
+    transform.rotation = Quaternion.Slerp(transform.rotation, targetrotation, rotationSpeed * Time.deltaTime);       
+    if (transform.position == targetPosition) {
+        speed = 0;
+        rotationSpeed = 0;
+    }
+}*/
+
+/* Bitte nicht löschen Gruß Dennis ^^
+Funktion um an anderes Skript zuzugreifen.
+GameObject laser = GameObject.Find("Laser");
+LaserMethod laserMethod = laser.GetComponent<LaserMethod>();
+targethit = laserMethod.targethit;
+*/

@@ -12,6 +12,7 @@ public class UfoEditing : MonoBehaviour {
     private Color color;
     
     // Update is called once per frame
+    // Farbfestlegung der Oberflächenfarbe
     void Awake() {
         switch (ufoColors) {
             case UfoColors.RED:
@@ -25,6 +26,8 @@ public class UfoEditing : MonoBehaviour {
                 break;
         }
     }
+    
+    //Farbfestlegung der Outline.
     void Update() {
         switch (ufoColors) {
             case UfoColors.RED:

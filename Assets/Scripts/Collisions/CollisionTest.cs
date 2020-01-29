@@ -15,7 +15,8 @@ public class CollisionTest : MonoBehaviour {
 
     void Exploding() {
         Instantiate(explosionEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
+        var foo = transform.parent.gameObject;
+        Destroy(foo);
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -34,7 +35,8 @@ public class CollisionTest : MonoBehaviour {
             Debug.Log(other.gameObject.name);
 
             if (plane.r == destroy.r && plane.b == destroy.b && plane.g == destroy.g) {
-                Destroy(gameObject);
+                var foo = transform.parent.gameObject;
+                Destroy(foo);
             }
             else {
                 if (!hasExploded) {

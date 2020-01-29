@@ -102,10 +102,9 @@ public class LaserMethod : MonoBehaviour {
         
         if (mode == Modes.SELECTION) {
             if (Physics.Raycast(ray, out hit, raycastLength) && hit.transform.CompareTag(SELECTABLE)) {
-                                                       LaserOnSelectable(hit);
+                LaserOnSelectable(hit);
             }
             else if (go != null && go.GetComponent<Selected>().isSelected == false) {
-                
                 lastHitTransform.GetComponent<Renderer>().material.SetFloat(Outline, 0);
             }
         }
