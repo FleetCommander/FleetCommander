@@ -34,6 +34,15 @@ public class LaserMethod : MonoBehaviour {
     private float delay = 1f;
     private Renderer bobbelRenderer;
     private Renderer bobbelSelectionRenderer;
+    
+
+    private Color firstColor = Color.black;
+    //Extern Color Schwarz definieren
+    // In Laser Abfrage ob Farbe schwarz -> Selectable
+    // Nach erster Auswahl -> Setze firstColor auf ausgewählten Wert
+    // Bei Auswahl immer Abfrage, ob ausgewähltes Objekt gleich firstColor
+    // Stack nach Deselect -> firstColor wieder auf schwarz setzen
+    
 
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
@@ -88,19 +97,19 @@ public class LaserMethod : MonoBehaviour {
         RaycastHit hit;
         Ray ray = new Ray(transform.position, transform.forward);
         
-
         int raycastLength = 5000;
         rayCastEndPosition = transform.position + (transform.forward * raycastLength);
-
+        
         if (mode == Modes.SELECTION) {
             if (Physics.Raycast(ray, out hit, raycastLength) && hit.transform.CompareTag(SELECTABLE)) {
-                LaserOnSelectable(hit);
+                                                       LaserOnSelectable(hit);
             }
             else if (go != null && go.GetComponent<Selected>().isSelected == false) {
+                
                 lastHitTransform.GetComponent<Renderer>().material.SetFloat(Outline, 0);
             }
         }
-
+        
         if (mode == Modes.NAVIGATION) {
             navigationBobble();
         }

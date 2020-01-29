@@ -21,19 +21,29 @@ public class CollisionTest : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
         var plane = gameObject.GetComponent<Renderer>().materials[1].color;
         var destroy = other.gameObject.GetComponent<Renderer>().materials[0].color;
-        
-        if (plane.r == destroy.r && plane.b == destroy.b && plane.g == destroy.g) {
-            Destroy(gameObject);
+
+        if (gameObject.name.Equals(other.gameObject.name)) {
+            var positionPlane1 = gameObject.GetComponent<Transform>().position;
+            var positionPlane2 = other.gameObject.GetComponent<Transform>().position;
+            var mittelpunkt = (positionPlane1 + positionPlane2) / 2;
+
         }
         else {
-            //Score -1 und explosion
-            if (!hasExploded) {
-                Exploding();
-                hasExploded = true;
 
+            Debug.Log(gameObject.name);
+            Debug.Log(other.gameObject.name);
+
+            if (plane.r == destroy.r && plane.b == destroy.b && plane.g == destroy.g) {
+                Destroy(gameObject);
             }
+            else {
+                if (!hasExploded) {
+                    Exploding();
+                    hasExploded = true;
 
-
+                }
+            }
         }
+
     }
 }

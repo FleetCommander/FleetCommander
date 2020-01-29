@@ -30,6 +30,7 @@ public class ShipMovement : MonoBehaviour {
             move();
     }
 
+    /*
     private void OnTriggerEnter(Collider other) {
         var plane = gameObject.GetComponent<Renderer>().materials;
         var destroy = other.gameObject.GetComponent<Renderer>().materials;
@@ -38,6 +39,7 @@ public class ShipMovement : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+    */
 
     public void Movement() {
         transform.position += transform.forward * Time.deltaTime * speed;
