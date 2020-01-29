@@ -691,34 +691,32 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="AddInvertedMeshCollider.cs" t="Include" />
-          <e p="Collisions" t="Include">
-            <e p="CollisionTest.cs" t="Include" />
-            <e p="FleetFly.cs" t="Include" />
+          <e p="GameControls.cs" t="Include" />
+          <e p="Laser &amp; Bubble" t="Include">
+            <e p="LaserMethod.cs" t="Include" />
+            <e p="Modes &amp; Events" t="Include">
+              <e p="ModeChangedEvent.cs" t="Include" />
+              <e p="Modes.cs" t="Include" />
+              <e p="TargetPositionEvent.cs" t="Include" />
+            </e>
           </e>
-          <e p="GameControls" t="Include">
-            <e p="GameControls.cs" t="Include" />
-          </e>
-          <e p="ModeChangedEvent.cs" t="Include" />
-          <e p="Modes.cs" t="Include" />
-          <e p="Navigation" t="Include">
+          <e p="Navigation never used" t="Include">
+            <e p="AddInvertedMeshCollider.cs" t="Include" />
             <e p="Navigation.cs" t="Include" />
           </e>
-          <e p="Plattformtrigger.cs" t="Include" />
-          <e p="Selection" t="Include">
-            <e p="LaserMethod.cs" t="Include" />
+          <e p="Spaceship" t="Include">
+            <e p="Collisions" t="Include">
+              <e p="CollisionTest.cs" t="Include" />
+              <e p="FleetFly.cs" t="Include" />
+            </e>
             <e p="Selected.cs" t="Include" />
+            <e p="ShipMovement.cs" t="Include" />
+            <e p="UfoColors.cs" t="Include" />
           </e>
-          <e p="ShipMovement.cs" t="Include" />
-          <e p="TargetPositionEvent.cs" t="Include" />
-          <e p="UfoColors.cs" t="Include" />
         </e>
         <e p="Shaders" t="Include">
           <e p="Border.shader" t="Include" />
           <e p="SeeThrough.shader" t="Include" />
-        </e>
-        <e p="Spaceship" t="Include">
-          <e p="README.txt" t="Include" />
         </e>
         <e p="Starfield Skybox" t="Include">
           <e p="Demo" t="Include">

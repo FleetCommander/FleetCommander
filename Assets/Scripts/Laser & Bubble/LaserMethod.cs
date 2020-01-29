@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEditor.UIElements;
@@ -16,7 +17,6 @@ public class LaserMethod : MonoBehaviour {
     [SerializeField] private Material invisiblemat;
     [FormerlySerializedAs("endPosition")] public Vector3 rayCastEndPosition;
     [SerializeField] private ModeChangedEvent modeChanged;
-    [SerializeField] private TargetPositionEvent targetPositionEvent;
 
     private static readonly int Outline = Shader.PropertyToID("_Outline");
     private const string SELECTABLE = "Selectable";
@@ -35,48 +35,31 @@ public class LaserMethod : MonoBehaviour {
     private Renderer bobbelRenderer;
     private Renderer bobbelSelectionRenderer;
     
-
-    private Color firstColor = Color.black;
-    //Extern Color Schwarz definieren
-    // In Laser Abfrage ob Farbe schwarz -> Selectable
-    // Nach erster Auswahl -> Setze firstColor auf ausgewählten Wert
-    // Bei Auswahl immer Abfrage, ob ausgewähltes Objekt gleich firstColor
-    // Stack nach Deselect -> firstColor wieder auf schwarz setzen
-    
-
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
         bobbel.transform.position = transform.position;
         bobbelRenderer = bobbel.GetComponent<Renderer>();
-        bobbelSelectionRenderer = bobbelSelection.GetComponent<Renderer>();
-
     }
 
     void Update() {
         bobbelRenderer.enabled = (mode == Modes.NAVIGATION);
         bobbel.transform.localScale = CalcScale(bobbel.transform.position - transform.position);
 
-        bobbelSelectionRenderer.enabled = (mode == Modes.BUBBLESELECTION);
-        //bobbelSelection.transform.localScale = CalcScale(bobbelSelection.transform.position - transform.position);
-
         if (OVRInput.GetDown(OVRInput.Button.Start)) {
             ToggleModeAndInvokeEvent();
         }
-
-
         if (OVRInput.GetDown(OVRInput.Button.Two)) {
             DeselectLast();
         }
-
         if (OVRInput.GetDown(OVRInput.Button.Four)) {
             DeselectAll();
         }
         Laser();
     }
 
-    private Vector3 CalcScale(Vector3 distanceVector) {
-        float distance = distanceVector.magnitude;
-        return new Vector3(distance, distance, distance) * 0.05f;
+    private void LateUpdate() {
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, rayCastEndPosition);
     }
 
     private void ToggleModeAndInvokeEvent() {
@@ -84,19 +67,15 @@ public class LaserMethod : MonoBehaviour {
             mode = Modes.NAVIGATION;
         }
         else if (mode == Modes.NAVIGATION) {
-            mode = Modes.BUBBLESELECTION;
-        }
-        else if (mode == Modes.BUBBLESELECTION) {
             mode = Modes.SELECTION;
         }
-
+        
         modeChanged.Invoke(mode);
     }
 
     private void Laser() {
         RaycastHit hit;
         Ray ray = new Ray(transform.position, transform.forward);
-        
         int raycastLength = 5000;
         rayCastEndPosition = transform.position + (transform.forward * raycastLength);
         
@@ -112,60 +91,6 @@ public class LaserMethod : MonoBehaviour {
         if (mode == Modes.NAVIGATION) {
             navigationBobble();
         }
-
-        if (mode == Modes.BUBBLESELECTION) {
-            bubbleSel();
-        }
-
-
-        lineRenderer.SetPosition(0, transform.position);
-        lineRenderer.SetPosition(1, rayCastEndPosition);
-    }
-
-    private void navigationBobble() {
-        
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y > 0.8 ||
-            OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y < -0.8) {
-            bobbelSpeed += 5f;
-        }
-        else {
-            bobbelSpeed = 2;
-        }
-
-        float threshold = (bobbel.transform.position +
-                           bobbelSpeed * OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y *
-                           (rayCastEndPosition - bobbel.transform.position).normalized - transform.position).magnitude;
-
-        var limit = 2;
-        if (threshold >= limit) {
-            bobbel.transform.position += bobbelSpeed * OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y *
-                                         (rayCastEndPosition - bobbel.transform.position).normalized;
-        }
-        else {
-            bobbel.transform.position =
-                transform.position + (rayCastEndPosition - bobbel.transform.position).normalized * limit;
-        }
-
-        if (OVRInput.GetDown(OVRInput.Button.One)) {
-            //DeselectLast();
-            int countShips = lastSelectedStack.Count;
-            for (int i = 0; i <= countShips; i++) {
-                if (lastSelectedStack.Count != 0) {
-                    GameObject lastSelected = lastSelectedStack.Pop();
-                    Vector3 targetPosition = bobbel.transform.position;
-                    ShipMovement shipMethod = lastSelected.GetComponent<ShipMovement>();
-                    shipMethod.targethit = true;
-                    shipMethod.targetPosition = targetPosition;
-                    materials[1] = standardCol.Pop();
-                    lastSelected.GetComponent<Collider>().enabled = true;
-                    lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0);
-                    lastSelected.transform.GetComponent<Renderer>().materials = materials;
-                    
-                }
-            }
-            //targetPositionEvent.Invoke(bobbel.transform.position);
-        }
-        
     }
 
     private void LaserOnSelectable(RaycastHit hit) {
@@ -174,11 +99,7 @@ public class LaserMethod : MonoBehaviour {
         go = hit.transform.gameObject;
         rayCastEndPosition = hit.point;
 
-        
-
-
         if (OVRInput.Get(OVRInput.Button.One)) {
-            
             if (buttonDownTimer == 0 || buttonDownTimer > delay) {
                 go.GetComponent<Selected>().MySelection();
                 go.GetComponent<Collider>().enabled = false;
@@ -190,10 +111,50 @@ public class LaserMethod : MonoBehaviour {
                 lastSelectedStack.Push(go);
             }
             buttonDownTimer += Time.deltaTime;
-
         }
         else {
             buttonDownTimer = 0;
+        }
+    }
+    
+    private void navigationBobble() {
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y > 0.8 ||
+            OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y < -0.8) {
+            bobbelSpeed += 5f;
+        }
+        else {
+            bobbelSpeed = 2;
+        }
+        
+        // Damit die Bobble nicht zu nah kommt.
+        float threshold = (bobbel.transform.position +
+                           bobbelSpeed * OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y *
+                           (rayCastEndPosition - bobbel.transform.position).normalized - transform.position).magnitude;
+        var limit = 2;
+        if (threshold >= limit) {
+            bobbel.transform.position += bobbelSpeed * OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y *
+                                         (rayCastEndPosition - bobbel.transform.position).normalized;
+        }
+        else {
+            bobbel.transform.position =
+                transform.position + (rayCastEndPosition - bobbel.transform.position).normalized * limit;
+        }
+        
+        // Losschicken zum Punkt
+        if (OVRInput.GetDown(OVRInput.Button.One)) {
+            int countShips = lastSelectedStack.Count;
+            for (int i = 0; i <= countShips; i++) {
+                GameObject lastSelected = lastSelectedStack.Pop();
+                materials[1] = standardCol.Pop();
+                Vector3 targetPosition = bobbel.transform.position;
+                ShipMovement shipMethod = lastSelected.GetComponent<ShipMovement>();
+                shipMethod.targethit = true;
+                shipMethod.targetPosition = targetPosition;
+                lastSelected.GetComponent<Collider>().enabled = true;
+                lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0);
+                lastSelected.transform.GetComponent<Renderer>().materials = materials;
+            }
+            //ToggleModeAndInvokeEvent();
         }
     }
 
@@ -214,7 +175,13 @@ public class LaserMethod : MonoBehaviour {
             DeselectLast();
         }
     }
-
+    
+    private Vector3 CalcScale(Vector3 distanceVector) {
+        float distance = distanceVector.magnitude;
+        return new Vector3(distance, distance, distance) * 0.05f;
+    }
+    
+    /* BUBBLESELECTION
     private void BubbleSelect() {
         targetLength = targetLength + OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y * bobbelSpeed;
         if (targetLength <= 0) {
@@ -255,15 +222,7 @@ public class LaserMethod : MonoBehaviour {
 
             if (threshold2 < (rayCastEndPosition - bobbelSelection.transform.position).magnitude) {
                 bobbelSelection.transform.localScale += new Vector3(1, 1, 1 * OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y) ;
-            }
-            
-
+            } 
         }
-        
-        
-
-       
-        
-        
-    }
+    }*/
 }

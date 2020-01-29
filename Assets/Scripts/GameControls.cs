@@ -15,7 +15,7 @@ public class GameControls : MonoBehaviour {
         checkRestart();
     }
 
-//wir arbeiten noch mit der Tastatur um restart und pause zu realisieren
+// wir arbeiten noch mit der Tastatur um restart und pause zu realisieren
 // Fire 3 von Vertical und Horizental benutzt
 // TODO : Ändern zu sinvollen Eingaben
 
