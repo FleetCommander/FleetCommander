@@ -35,6 +35,9 @@ public class LaserMethod : MonoBehaviour {
     private Renderer bobbelRenderer;
     private Renderer bobbelSelectionRenderer;
     
+    private GameObject lastGo = null;
+    private GameObject currentGo;
+    
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();
         bobbel.transform.position = transform.position;
@@ -81,6 +84,7 @@ public class LaserMethod : MonoBehaviour {
         
         if (mode == Modes.SELECTION) {
             if (Physics.Raycast(ray, out hit, raycastLength) && hit.transform.CompareTag(SELECTABLE)) {
+                currentGo = hit.transform.gameObject;
                 LaserOnSelectable(hit);
             }
             else if (go != null && go.GetComponent<Selected>().isSelected == false) {
@@ -97,11 +101,19 @@ public class LaserMethod : MonoBehaviour {
         lastHitTransform = hit.transform;
         hit.transform.GetComponent<Renderer>().material.SetFloat(Outline, 0.2f);
         go = hit.transform.gameObject;
+        
+        if(lastGo != null && lastGo != currentGo && lastGo.GetComponent<Selected>().isSelected == false){
+            lastGo.GetComponent<Renderer>().material.SetFloat(Outline, 0f);
+        }
+        
+        
+        lastGo = go;
+        
         rayCastEndPosition = hit.point;
 
         if (OVRInput.Get(OVRInput.Button.One)) {
             if (buttonDownTimer == 0 || buttonDownTimer > delay) {
-                go.GetComponent<Selected>().MySelection();
+                go.GetComponent<Selected>().ToggleSelection();
                 go.GetComponent<Collider>().enabled = false;
                 materials = hit.transform.GetComponent<MeshRenderer>().materials;
                 Material mat1 = materials[1];
@@ -142,19 +154,41 @@ public class LaserMethod : MonoBehaviour {
         
         // Losschicken zum Punkt
         if (OVRInput.GetDown(OVRInput.Button.One)) {
+            Vector3 targetPosition = bobbel.transform.position;
+            Vector3 endPosition = targetPosition;
+            float distance = 3;
             int countShips = lastSelectedStack.Count;
-            for (int i = 0; i <= countShips; i++) {
+            for (int i = 0; i < countShips; i++) {
+
+                float lambda = i * distance;
+//                if (i == 0) {
+//                    endPosition = targetPosition;
+//                }
+                if (i % 3 == 1) {
+                    endPosition = targetPosition + new Vector3(((-1) ^ i) * lambda, 0, 0);
+                }
+
+                if (i % 3 == 2) {
+                    endPosition = targetPosition + new Vector3(0, ((-1) ^ i) * lambda, 0);
+                }
+
+                if (i % 3 == 0) {
+                    endPosition = targetPosition + new Vector3(0, 0, ((-1) ^ i) * lambda);
+                }
+
                 GameObject lastSelected = lastSelectedStack.Pop();
                 materials[1] = standardCol.Pop();
-                Vector3 targetPosition = bobbel.transform.position;
-                ShipMovement shipMethod = lastSelected.GetComponent<ShipMovement>();
-                shipMethod.targethit = true;
-                shipMethod.targetPosition = targetPosition;
+                
+                ShipMovement shipMovement = lastSelected.GetComponent<ShipMovement>();
+                shipMovement.targethit = true;
+                shipMovement.targetPosition = targetPosition;
+                shipMovement.endPosition = endPosition;
                 lastSelected.GetComponent<Collider>().enabled = true;
                 lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0);
                 lastSelected.transform.GetComponent<Renderer>().materials = materials;
             }
-            //ToggleModeAndInvokeEvent();
+            
+            ToggleModeAndInvokeEvent();
         }
     }
 
@@ -163,7 +197,7 @@ public class LaserMethod : MonoBehaviour {
             GameObject lastSelected = lastSelectedStack.Pop();
             materials[1] = standardCol.Pop();
             lastSelected.GetComponent<Collider>().enabled = true;
-            lastSelected.GetComponent<Selected>().MySelection();
+            lastSelected.GetComponent<Selected>().ToggleSelection();
             lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0);
             lastSelected.transform.GetComponent<Renderer>().materials = materials;
         }
@@ -171,7 +205,7 @@ public class LaserMethod : MonoBehaviour {
 
     private void DeselectAll() {
         int countShips = lastSelectedStack.Count;
-        for (int i = 0; i <= countShips; i++) {
+        for (int i = 0; i < countShips; i++) {
             DeselectLast();
         }
     }

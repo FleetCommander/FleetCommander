@@ -12,7 +12,7 @@ public class Selected : MonoBehaviour {
         isSelected = false;
     }
     
-    public void MySelection() {
+    public void ToggleSelection() {
         if (isSelected) {
             isSelected = false;
         }

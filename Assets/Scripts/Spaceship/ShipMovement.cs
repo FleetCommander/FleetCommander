@@ -12,16 +12,15 @@ public class ShipMovement : MonoBehaviour {
     [SerializeField] private Selected select;
     [SerializeField] public bool targethit = false;
     private UfoColors ufoColors;
+    public Vector3 endPosition;
     
     public void Awake() {
-        if (GetComponent<Renderer>().material.name.Equals("RED")) {
-            ufoColors = UfoColors.RED;
-        }
         select = GetComponent<Selected>();
+        
     }
 
     void Update() {
-        isSelected = @select.isSelected;
+        isSelected = select.isSelected;
         if(targethit && isSelected)
             move();
     }
@@ -33,8 +32,12 @@ public class ShipMovement : MonoBehaviour {
         }
         else {
             step = 0.1f;
-            targethit = false;
-            @select.MySelection();
+            targetPosition = endPosition;
+            if (transform.position == targetPosition) {
+                targethit = false;
+                select.ToggleSelection(); 
+            }
+           
         }
     }
 }

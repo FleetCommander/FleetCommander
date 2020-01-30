@@ -27,6 +27,12 @@
             <e p="DestroyEffect.cs" t="Include" />
           </e>
         </e>
+        <e p="Material" t="Include">
+          <e p="Shaders" t="Include">
+            <e p="Border.shader" t="Include" />
+            <e p="SeeThrough.shader" t="Include" />
+          </e>
+        </e>
         <e p="Oculus" t="Include">
           <e p="AudioManager" t="Include">
             <e p="Scenes" t="Include">
@@ -714,10 +720,6 @@
             <e p="UfoColors.cs" t="Include" />
           </e>
         </e>
-        <e p="Shaders" t="Include">
-          <e p="Border.shader" t="Include" />
-          <e p="SeeThrough.shader" t="Include" />
-        </e>
         <e p="Starfield Skybox" t="Include">
           <e p="Demo" t="Include">
             <e p="Script" t="Include">
@@ -737,7 +739,7 @@
             </e>
           </e>
         </e>
-        <e p="UfoEditing.cs" t="Include" />
+        <e p="UfoColor.cs" t="Include" />
         <e p="Visibility.cs" t="Include" />
       </e>
       <e p="empty please.sln" t="IncludeFlat" />

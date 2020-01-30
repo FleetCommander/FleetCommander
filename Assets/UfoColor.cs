@@ -4,8 +4,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-[ExecuteInEditMode]
-public class UfoEditing : MonoBehaviour {
+public class UfoColor : MonoBehaviour {
     // Start is called before the first frame update
 
     [SerializeField] private UfoColors ufoColors;
@@ -13,21 +12,6 @@ public class UfoEditing : MonoBehaviour {
     
     // Update is called once per frame
     // Farbfestlegung der Oberflächenfarbe
-    void Awake() {
-        switch (ufoColors) {
-            case UfoColors.RED:
-                GetComponentInChildren<Renderer>().materials[1].color = Color.red;
-                break;
-            case UfoColors.YELLOW:
-                GetComponentInChildren<Renderer>().materials[1].color = Color.yellow;
-                break;
-            case UfoColors.BLUE:
-                GetComponentInChildren<Renderer>().materials[1].color = Color.blue;
-                break;
-        }
-    }
-    
-    //Farbfestlegung der Outline.
     void Update() {
         switch (ufoColors) {
             case UfoColors.RED:
