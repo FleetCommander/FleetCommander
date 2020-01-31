@@ -27,9 +27,15 @@ public class ShipMovement : MonoBehaviour {
    
     public void move() {
         if (transform.position != targetPosition) {
+            if ((transform.position - targetPosition).magnitude <= 8) {
+                targetPosition = endPosition;
+                step -= 0.00005f;
+            }
             step += 0.0004f;
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);    
         }
+
+       
         else {
             step = 0.1f;
             targetPosition = endPosition;
