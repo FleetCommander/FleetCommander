@@ -10,11 +10,14 @@ public class OnCollision : MonoBehaviour
     private Material[] materials;
     private Stack<Material> standardCol = new Stack<Material>();
     [SerializeField] private Material invisiblemat;
+    public Stack<GameObject> testStack  = new Stack<GameObject>();
+    
+    
     private void OnTriggerEnter(Collider col) {
-        Debug.Log("Collision erkannt Juhu");
         col.gameObject.GetComponent<Renderer>().material.SetFloat(Outline, 0.2f);
-    }
+     }
 
+    
     private void OnTriggerStay(Collider col) {
         if (OVRInput.Get(OVRInput.Button.One)) {
 
@@ -25,13 +28,12 @@ public class OnCollision : MonoBehaviour
             standardCol.Push(mat1);
             materials[1] = invisiblemat;
             col.gameObject.transform.GetComponent<MeshRenderer>().materials = materials;
-            BubbleMethod bubbleMethod = new BubbleMethod();
-            bubbleMethod.lastSelectedStack.Push(col.gameObject);
+            testStack.Push(col.gameObject);
         }
     }
 
     private void OnTriggerExit(Collider col) {
-        Debug.Log("Collision erkannt Juhu");
+        
         col.gameObject.GetComponent<Renderer>().material.SetFloat(Outline, 0f);
     }
 }

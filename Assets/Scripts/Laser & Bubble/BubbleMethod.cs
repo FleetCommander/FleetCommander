@@ -97,25 +97,14 @@ public class BubbleMethod : MonoBehaviour {
 
         if (mode == Modes.SELECTION) {
             bubbleSel();
-            BubbleHit();
-            if (Physics.Raycast(ray, out hit, raycastLength) && hit.transform.CompareTag(SELECTABLE)) {
-
-            }
-
-            if (mode == Modes.NAVIGATION) {
+         }   
+        if (mode == Modes.NAVIGATION) {
                 navigationBobble();
-            }
         }
+        
     }
 
-    private void BubbleHit() {
-        
-        
-        
-
-
-    }
-
+  
     private void LaserOnSelectable(RaycastHit hit) {
         lastHitTransform = hit.transform;
         hit.transform.GetComponent<Renderer>().material.SetFloat(Outline, 0.2f);
@@ -149,7 +138,14 @@ public class BubbleMethod : MonoBehaviour {
         }
     }
 
-    private void navigationBobble() {
+    private void navigationBobble()
+    {
+
+        OnCollision col = bobbelNavigation.GetComponent<OnCollision>();
+
+        
+        //lastSelectedStack = col.testStack;
+        
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y > 0.8 ||
             OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y < -0.8) {
             bobbelSpeed += 5f;
@@ -174,10 +170,12 @@ public class BubbleMethod : MonoBehaviour {
 
         // Losschicken zum Punkt
         if (OVRInput.GetDown(OVRInput.Button.One)) {
+            
             Vector3 targetPosition = bobbelNavigation.transform.position;
             Vector3 endPosition = targetPosition;
             float distance = 10;
-            int countShips = lastSelectedStack.Count;
+            //int countShips = lastSelectedStack.Count;
+            int countShips = col.testStack.Count;
             for (int i = 0; i < countShips; i++) {
 
                 double lambda = Math.Pow(-1, i) * Math.Ceiling((double) i / 7) * distance;
@@ -219,7 +217,8 @@ public class BubbleMethod : MonoBehaviour {
                 }
 
 
-                GameObject lastSelected = lastSelectedStack.Pop();
+                //GameObject lastSelected = lastSelectedStack.Pop();
+                GameObject lastSelected = col.testStack.Pop();
                 materials[1] = standardCol.Pop();
 
                 ShipMovement shipMovement = lastSelected.GetComponent<ShipMovement>();
