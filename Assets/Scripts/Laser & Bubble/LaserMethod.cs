@@ -34,9 +34,10 @@ public class LaserMethod : MonoBehaviour {
     private float delay = 1f;
     private Renderer bobbelRenderer;
     private Renderer bobbelSelectionRenderer;
-    
     private GameObject lastGo = null;
     private GameObject currentGo;
+
+
     
     void Awake() {
         lineRenderer = GetComponent<LineRenderer>();

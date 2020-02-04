@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3766095718396800714}
   - component: {fileID: 3766095718396800709}
   m_Layer: 0
-  m_Name: Laser 1
+  m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_LocalPosition: {x: 0.0064, y: 0.0456, z: 0.0769}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6553934568551385208}
+  - {fileID: 754628876403148820}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   bobbelSpeed: 2
-  bobbel: {fileID: 6553491067211797030}
+  bobbel: {fileID: 0}
   bobbelSelection: {fileID: 1000012825293744, guid: 73ea9d6c6c3480147ba658fc59d0afa4,
     type: 3}
   invisiblemat: {fileID: 2100000, guid: 8e9aebb779ae4fb44b1153e847083ea0, type: 2}
@@ -265,15 +265,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: e1cac9f87fda27445ac6a54ade344d63, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7140b244cc7b424cbe08d5307fa8aa4, type: 3}
---- !u!1 &6553491067211797030 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7976281198716528226, guid: a7140b244cc7b424cbe08d5307fa8aa4,
-    type: 3}
-  m_PrefabInstance: {fileID: 3766095718410548292}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6553934568551385208 stripped
+--- !u!4 &754628876403148820 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7978017742782626876, guid: a7140b244cc7b424cbe08d5307fa8aa4,
+  m_CorrespondingSourceObject: {fileID: 4484220654110506064, guid: a7140b244cc7b424cbe08d5307fa8aa4,
     type: 3}
   m_PrefabInstance: {fileID: 3766095718410548292}
   m_PrefabAsset: {fileID: 0}
