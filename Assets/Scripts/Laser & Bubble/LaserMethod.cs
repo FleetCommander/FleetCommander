@@ -158,26 +158,12 @@ public class LaserMethod : MonoBehaviour {
             int countShips = lastSelectedStack.Count;
             for (int i = 0; i < countShips; i++) {
 
-                double lambda = Math.Pow(-1, i) * Math.Ceiling((double)i/7) * distance;
+                double lambda = Math.Pow(-1, i) * Math.Ceiling(((double)i)/7) * distance;
                 if (i == 0) {
                     endPosition = targetPosition;
                 }
-//                if (i % 3 == 1) {
-//                    endPosition = targetPosition + new Vector3((float)lambda, 0, 0);
-//                }
-//
-//                if (i % 3 == 2) {
-//                    endPosition = targetPosition + new Vector3(0, (float)lambda, 0);
-//                }
-//
-//                if (i % 3 == 0) {
-//                    endPosition = targetPosition + new Vector3(0, 0,  (float)lambda);
-//                }
 
-                if (i <= 1) {
-                    distance = 20;
-                }
-
+              
                 if (i % 7 == 1) {
                     endPosition = targetPosition + new Vector3((float) lambda, 0, 0);
                 }

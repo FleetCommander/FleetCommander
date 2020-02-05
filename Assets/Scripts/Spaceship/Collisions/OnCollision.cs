@@ -10,7 +10,7 @@ public class OnCollision : MonoBehaviour
     private Material[] materials;
     private Stack<Material> standardCol = new Stack<Material>();
     [SerializeField] private Material invisiblemat;
-    public Stack<GameObject> testStack  = new Stack<GameObject>();
+   
     
     
     private void OnTriggerEnter(Collider col) {
@@ -23,12 +23,12 @@ public class OnCollision : MonoBehaviour
 
             col.gameObject.GetComponent<Selected>().ToggleSelection();
             col.gameObject.GetComponent<Collider>().enabled = false;
-            materials = col.gameObject.GetComponent<MeshRenderer>().materials;
-            Material mat1 = materials[1];
-            standardCol.Push(mat1);
-            materials[1] = invisiblemat;
-            col.gameObject.transform.GetComponent<MeshRenderer>().materials = materials;
-            testStack.Push(col.gameObject);
+            transform.parent.GetComponent<BubbleMethod>().materials = col.gameObject.GetComponent<MeshRenderer>().materials;
+            Material mat1 = transform.parent.GetComponent<BubbleMethod>().materials[1];
+            transform.parent.GetComponent<BubbleMethod>().standardCol.Push(mat1);
+            transform.parent.GetComponent<BubbleMethod>().materials[1] = invisiblemat;
+            col.gameObject.transform.GetComponent<MeshRenderer>().materials = transform.parent.GetComponent<BubbleMethod>().materials;
+            transform.parent.GetComponent<BubbleMethod>().lastSelectedStack.Push(col.gameObject);
         }
     }
 

@@ -20890,7 +20890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &876354317
 Transform:
   m_ObjectHideFlags: 0
@@ -32279,6 +32279,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Laser 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5424623283354118608, guid: 7ad04f9bbd0605f4d90f38903c6f5208,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5424623283354118611, guid: 7ad04f9bbd0605f4d90f38903c6f5208,
         type: 3}

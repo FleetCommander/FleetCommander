@@ -13,6 +13,7 @@ using UnityEngine.Serialization;
 public class BubbleMethod : MonoBehaviour {
     [SerializeField] private Modes mode = Modes.SELECTION;
     [SerializeField] [Range(2f, 10f)] private float bobbelSpeed = 2f;
+    [SerializeField] [Range(2f, 10f)] private float bobbelSpeedSelection = 2f;
     [SerializeField] private GameObject bobbelNavigation;
     [SerializeField] private GameObject bobbelSelection;
     [SerializeField] private Material invisiblemat;
@@ -21,7 +22,7 @@ public class BubbleMethod : MonoBehaviour {
     private static readonly int Outline = Shader.PropertyToID("_Outline");
     private const string SELECTABLE = "Selectable";
     public Stack<GameObject> lastSelectedStack = new Stack<GameObject>();
-    private Stack<Material> standardCol = new Stack<Material>();
+    public Stack<Material> standardCol = new Stack<Material>();
 
     private GameObject go;
     private Material material;
@@ -29,7 +30,7 @@ public class BubbleMethod : MonoBehaviour {
     private LineRenderer lineRenderer;
     private Transform lastHitTransform;
     private Color standardcolor;
-    private Material[] materials;
+    public Material[] materials;
     private float buttonDownTimer;
     private float delay = 1f;
     private Renderer bobbelRenderer;
@@ -46,6 +47,8 @@ public class BubbleMethod : MonoBehaviour {
         bobbelSelection.transform.position = transform.position;
         bobbelSelectionRenderer = bobbelSelection.GetComponent<Renderer>();
 
+       
+        bobbelSelection.transform.position = transform.position + transform.forward *5;
 
     }
 
@@ -80,9 +83,11 @@ public class BubbleMethod : MonoBehaviour {
     private void ToggleMode() {
         if (mode == Modes.SELECTION) {
             mode = Modes.NAVIGATION;
+            bobbelSelection.SetActive(false);
         }
         else if (mode == Modes.NAVIGATION) {
             mode = Modes.SELECTION;
+            bobbelSelection.SetActive(true);
         }
     }
 
@@ -139,19 +144,17 @@ public class BubbleMethod : MonoBehaviour {
             Vector3 endPosition = targetPosition;
             float distance = 10;
             //int countShips = lastSelectedStack.Count;
-            int countShips = col.testStack.Count;
-            for (int i = 0; i < countShips; i++) {
+            int countShips = lastSelectedStack.Count;
+            for (int i = 0; i < countShips; i++)
+            {
 
+                if (i > 7){
+                    distance = 10;
+                }
                 double lambda = Math.Pow(-1, i) * Math.Ceiling((double) i / 7) * distance;
                 if (i == 0) {
                     endPosition = targetPosition;
                 }
-
-
-                if (i <= 1) {
-                    distance = 20;
-                }
-
                 if (i % 7 == 1) {
                     endPosition = targetPosition + new Vector3((float) lambda, 0, 0);
                 }
@@ -182,7 +185,7 @@ public class BubbleMethod : MonoBehaviour {
 
 
                 //GameObject lastSelected = lastSelectedStack.Pop();
-                GameObject lastSelected = col.testStack.Pop();
+                GameObject lastSelected = lastSelectedStack.Pop();
                 materials[1] = standardCol.Pop();
 
                 ShipMovement shipMovement = lastSelected.GetComponent<ShipMovement>();
@@ -192,8 +195,11 @@ public class BubbleMethod : MonoBehaviour {
                 lastSelected.GetComponent<Collider>().enabled = true;
                 lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0);
                 lastSelected.transform.GetComponent<Renderer>().materials = materials;
+                lastSelected.GetComponent<Selected>().ToggleSelection();
             }
 
+            bobbelSelection.transform.position = transform.position + transform.forward *5;
+            bobbelSelection.transform.localScale = new Vector3(0.5f,0.5f,0.5f); 
             ToggleMode();
         }
     }
@@ -231,41 +237,60 @@ public class BubbleMethod : MonoBehaviour {
 
     public void bubbleSel() {
 
+ //       bobbelSelection.transform.position = transform.position + (rayCastEndPosition - bobbelSelection.transform.position).normalized *5;
+
+        float radius = bobbelSelection.GetComponent<SphereCollider>().radius * bobbelSelection.transform.localScale.x;
+            //GetComponent<Renderer>().bounds.extents.magnitude;
         
-        
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y > 0.8 ||
-            OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y < -0.8) {
-            bobbelSpeed += 5f;
+        if (OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y > 0.8 ||
+            OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y < -0.8) {
+            bobbelSpeedSelection += 0.05f;
         }
         else {
-            bobbelSpeed = 2f;
+            bobbelSpeedSelection = 2f;
+        }
+        Vector3 newPosition2 = new Vector3(0,0,0); 
+       
+        newPosition2 = bobbelSelection.transform.position + bobbelSpeedSelection *
+                           OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y
+                           * transform.forward;
+
+        float limit = radius + 5;
+        if ((newPosition2 - transform.position).magnitude >= limit)
+        {
+            bobbelSelection.transform.position = newPosition2;
+        }
+        else
+        {
+            bobbelSelection.transform.position = transform.position +
+                                                 transform.forward *
+                                                 limit;
+            bobbelSpeedSelection = 2f;
         }
 
-        float threshold = (bobbelSelection.transform.position +
-                           bobbelSpeed * OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y *
-                           (rayCastEndPosition - bobbelSelection.transform.position).normalized - transform.position).magnitude;
 
+        
 
-        float threshold2 = (bobbelSelection.transform.localScale +
-                           new Vector3(1, 1, 1 * OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y)).x;
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y > 0.5)
+        {
+
+            bobbelSelection.transform.localScale += new Vector3(1, 1, 1);
+        }
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y < -0.5)
+        {
+            Vector3 newScale2 = new Vector3(0,0,0);
+            newScale2 = bobbelSelection.transform.localScale + new Vector3(-1, -1, -1);
+            if (newScale2.x < 3)
+            {
+                bobbelSelection.transform.localScale = new Vector3(0.5f,0.5f,0.5f);                
+            }
+            else
+            {
+                bobbelSelection.transform.localScale += new Vector3(-1, -1, -1);    
+            }
             
-            
-        var limit = 2;
-        if (threshold >= limit) {
-            bobbelSelection.transform.position += bobbelSpeed * OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick).y *
-                                         (rayCastEndPosition - bobbelSelection.transform.position).normalized;
         }
-        else {
-            bobbelSelection.transform.position =
-                transform.position + (rayCastEndPosition - bobbelSelection.transform.position).normalized * limit;
-        }
-
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y > 0.5) {
-
-            if (threshold2 < (rayCastEndPosition - bobbelSelection.transform.position).magnitude) {
-                bobbelSelection.transform.localScale += new Vector3(1, 1, 1 * OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick).y) ;
-            } 
-        }
+        
         rayCastEndPosition = bobbelSelection.transform.position;
     }
 
