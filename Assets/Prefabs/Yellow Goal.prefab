@@ -4771,7 +4771,7 @@ GameObject:
   - component: {fileID: 8154753316077353574}
   m_Layer: 0
   m_Name: Yellow Goal Collision Detector
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -13,7 +13,7 @@ public sealed class DataContainer{
     public int time;
     public bool skippedLevel = false;
 
-    public static DataContainer getInstance() {
+    public static DataContainer GetInstance() {
         return dataContainer;
     }
 }

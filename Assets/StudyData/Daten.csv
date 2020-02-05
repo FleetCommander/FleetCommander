@@ -1,2 +1,5 @@
 Type,Inputs,Mistakes(wrong portal),Time in sec,Skipped a Level?
-Laser,0,0,0,False
+Laser,41,2,48,False
+Laser,1,0,5,False
+Laser,1,0,12,True
+Laser,11,0,6,True

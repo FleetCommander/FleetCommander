@@ -15,11 +15,13 @@ public class CollisionWithObjects : MonoBehaviour {
         
         
         if (other.tag.Equals(GOAL) && other.GetComponent<GoalColor>().goalColor.Equals(GetComponentInParent<UfoColor>().ufoColors)) {
+            GameObject levelManager = GameObject.Find("LevelManager");
+            levelManager.GetComponent<LevelManager>().AddPassedUfo();
             Destroy(transform.parent.gameObject);
             //todo success play sound
         }
         
-        if (other.tag.Equals(HAZARD)) {
+        else if (other.tag.Equals(HAZARD)) {
             Explode(other.gameObject);
             Explode(transform.parent.gameObject);
         }
@@ -31,7 +33,7 @@ public class CollisionWithObjects : MonoBehaviour {
 
 
     private void Explode(GameObject target) {
-        DataContainer.getInstance().mistakes++;
+        DataContainer.GetInstance().mistakes++;
         Instantiate(explosionEffect, target.transform.position, target.transform.rotation);
         //Todo wrong feedback
         Destroy(target);
