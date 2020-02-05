@@ -834,8 +834,6 @@
           </e>
           <e p="Spaceship" t="Include">
             <e p="Collisions" t="Include">
-              <e p="CollisionTest.cs" t="Include" />
-              <e p="FleetFly.cs" t="Include" />
               <e p="OnCollision.cs" t="Include" />
             </e>
             <e p="Selected.cs" t="Include" />

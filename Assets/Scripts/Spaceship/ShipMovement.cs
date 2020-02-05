@@ -21,7 +21,7 @@ public class ShipMovement : MonoBehaviour {
 
     void Update() {
         isSelected = select.isSelected;
-        if(targethit && isSelected)
+        if(targethit)
             move();
     }
    
@@ -41,7 +41,6 @@ public class ShipMovement : MonoBehaviour {
             targetPosition = endPosition;
             if (transform.position == targetPosition) {
                 targethit = false;
-                select.ToggleSelection(); 
             }
            
         }
