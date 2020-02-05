@@ -16,8 +16,7 @@ public class BubbleMethod : MonoBehaviour {
     [SerializeField] private GameObject bobbelNavigation;
     [SerializeField] private GameObject bobbelSelection;
     [SerializeField] private Material invisiblemat;
-    [FormerlySerializedAs("endPosition")] public Vector3 rayCastEndPosition;
-    [SerializeField] private ModeChangedEvent modeChanged;
+    public Vector3 rayCastEndPosition;
 
     private static readonly int Outline = Shader.PropertyToID("_Outline");
     private const string SELECTABLE = "Selectable";
@@ -59,7 +58,7 @@ public class BubbleMethod : MonoBehaviour {
         bobbelNavigation.transform.localScale = CalcScale(bobbelNavigation.transform.position - transform.position);
 
         if (OVRInput.GetDown(OVRInput.Button.Start)) {
-            ToggleModeAndInvokeEvent();
+            ToggleMode();
         }
 
         if (OVRInput.GetDown(OVRInput.Button.Two)) {
@@ -78,15 +77,13 @@ public class BubbleMethod : MonoBehaviour {
         lineRenderer.SetPosition(1, rayCastEndPosition);
     }
 
-    private void ToggleModeAndInvokeEvent() {
+    private void ToggleMode() {
         if (mode == Modes.SELECTION) {
             mode = Modes.NAVIGATION;
         }
         else if (mode == Modes.NAVIGATION) {
             mode = Modes.SELECTION;
         }
-
-        modeChanged.Invoke(mode);
     }
 
     private void Laser() {
@@ -104,40 +101,7 @@ public class BubbleMethod : MonoBehaviour {
         
     }
 
-  
-    private void LaserOnSelectable(RaycastHit hit) {
-        lastHitTransform = hit.transform;
-        hit.transform.GetComponent<Renderer>().material.SetFloat(Outline, 0.2f);
-        go = hit.transform.gameObject;
-
-        if (lastGo != null && lastGo != currentGo && lastGo.GetComponent<Selected>().isSelected == false) {
-            lastGo.GetComponent<Renderer>().material.SetFloat(Outline, 0f);
-        }
-
-
-        lastGo = go;
-
-        rayCastEndPosition = hit.point;
-
-        if (OVRInput.Get(OVRInput.Button.One)) {
-            if (buttonDownTimer == 0 || buttonDownTimer > delay) {
-                go.GetComponent<Selected>().ToggleSelection();
-                go.GetComponent<Collider>().enabled = false;
-                materials = hit.transform.GetComponent<MeshRenderer>().materials;
-                Material mat1 = materials[1];
-                standardCol.Push(mat1);
-                materials[1] = invisiblemat;
-                hit.transform.GetComponent<MeshRenderer>().materials = materials;
-                lastSelectedStack.Push(go);
-            }
-
-            buttonDownTimer += Time.deltaTime;
-        }
-        else {
-            buttonDownTimer = 0;
-        }
-    }
-
+    
     private void navigationBobble()
     {
 
@@ -230,7 +194,7 @@ public class BubbleMethod : MonoBehaviour {
                 lastSelected.transform.GetComponent<Renderer>().materials = materials;
             }
 
-            ToggleModeAndInvokeEvent();
+            ToggleMode();
         }
     }
 

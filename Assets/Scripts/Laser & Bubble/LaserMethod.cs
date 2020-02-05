@@ -15,8 +15,7 @@ public class LaserMethod : MonoBehaviour {
     [SerializeField] private GameObject bobbel;
     [SerializeField] private GameObject bobbelSelection;
     [SerializeField] private Material invisiblemat;
-    [FormerlySerializedAs("endPosition")] public Vector3 rayCastEndPosition;
-    [SerializeField] private ModeChangedEvent modeChanged;
+    public Vector3 rayCastEndPosition;
 
     private static readonly int Outline = Shader.PropertyToID("_Outline");
     private const string SELECTABLE = "Selectable";
@@ -50,7 +49,7 @@ public class LaserMethod : MonoBehaviour {
         bobbel.transform.localScale = CalcScale(bobbel.transform.position - transform.position);
 
         if (OVRInput.GetDown(OVRInput.Button.Start)) {
-            ToggleModeAndInvokeEvent();
+            ToggleMode();
         }
         if (OVRInput.GetDown(OVRInput.Button.Two)) {
             DeselectLast();
@@ -66,15 +65,13 @@ public class LaserMethod : MonoBehaviour {
         lineRenderer.SetPosition(1, rayCastEndPosition);
     }
 
-    private void ToggleModeAndInvokeEvent() {
+    private void ToggleMode() {
         if (mode == Modes.SELECTION) {
             mode = Modes.NAVIGATION;
         }
         else if (mode == Modes.NAVIGATION) {
             mode = Modes.SELECTION;
         }
-        
-        modeChanged.Invoke(mode);
     }
 
     private void Laser() {
@@ -222,7 +219,7 @@ public class LaserMethod : MonoBehaviour {
                 lastSelected.transform.GetComponent<Renderer>().materials = materials;
             }
             
-            ToggleModeAndInvokeEvent();
+            ToggleMode();
         }
     }
 
