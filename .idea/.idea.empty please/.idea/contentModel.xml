@@ -127,17 +127,17 @@
             </e>
           </e>
         </e>
+        <e p="CollisionWithObjects.cs" t="Include" />
+        <e p="DestroySelf.cs" t="Include" />
         <e p="Editor" t="Include">
           <e p="AddInvertedMeshColliderEditor.cs" t="Include" />
           <e p="GroupCommand.cs" t="Include" />
         </e>
-        <e p="EnterGoal.cs" t="Include" />
         <e p="Fx Explosion Pack" t="Include">
           <e p="Script" t="Include">
             <e p="csDemoScenceControl.cs" t="Include" />
             <e p="csLightControl.cs" t="Include" />
             <e p="csMouseOrbit.cs" t="Include" />
-            <e p="DestroyEffect.cs" t="Include" />
           </e>
         </e>
         <e p="GoalColor.cs" t="Include" />

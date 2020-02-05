@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Minen : MonoBehaviour {
     private float speed = 10.0f;
-    [SerializeField] private float time = 0f;
-    [SerializeField] private bool left = true;
+    private float time = 0f;
+    private bool left = true;
     void Update() {
         if(time <= 25)
             Move();

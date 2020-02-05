@@ -26,46 +26,22 @@ public class ShipMovement : MonoBehaviour {
     }
    
     public void move() {
-        if (transform.position != targetPosition) {
-            if ((transform.position - targetPosition).magnitude <= 8) {
+        if (transform.parent.position != targetPosition) {
+            if ((transform.parent.position - targetPosition).magnitude <= 8) {
                 targetPosition = endPosition;
                 step -= 0.00005f;
             }
             step += 0.0004f;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);    
+            transform.parent.position = Vector3.MoveTowards(transform.parent.position, targetPosition, step);    
         }
-
-       
+        
         else {
             step = 0.1f;
             targetPosition = endPosition;
-            if (transform.position == targetPosition) {
+            if (transform.parent.position == targetPosition) {
                 targethit = false;
             }
            
         }
     }
 }
-
-
-
-
-
-/*
-Movement für smoothen Raumschiffmovement
-public void Movement() {
-    transform.position += transform.forward * Time.deltaTime * speed;
-    var targetrotation = Quaternion.LookRotation(targetPosition - transform.position);
-    transform.rotation = Quaternion.Slerp(transform.rotation, targetrotation, rotationSpeed * Time.deltaTime);       
-    if (transform.position == targetPosition) {
-        speed = 0;
-        rotationSpeed = 0;
-    }
-}*/
-
-/* Bitte nicht löschen Gruß Dennis ^^
-Funktion um an anderes Skript zuzugreifen.
-GameObject laser = GameObject.Find("Laser");
-LaserMethod laserMethod = laser.GetComponent<LaserMethod>();
-targethit = laserMethod.targethit;
-*/
