@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IDGenerator {
+public class IDGenerator: ScriptableObject {
     [SerializeField]
-    private static int id = 0;
+    private static int id;
 
     public static int GetNextId() {
+        
         return id++;
     }
 }

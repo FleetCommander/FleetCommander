@@ -8,6 +8,118 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="AHProxy" t="Include">
+          <e p="PlanetShader" t="Include">
+            <e p="DemoScene" t="Include">
+              <e p="Standard Assets" t="Include">
+                <e p="Editor" t="Include">
+                  <e p="ImageEffects" t="Include">
+                    <e p="BloomAndFlaresEditor.cs" t="Include" />
+                    <e p="BloomEditor.cs" t="Include" />
+                    <e p="SunShaftsEditor.cs" t="Include" />
+                  </e>
+                </e>
+                <e p="Effects" t="Include">
+                  <e p="AntiAliasing" t="Include">
+                    <e p="AntiAliasing.cs" t="Include" />
+                    <e p="Editor" t="Include">
+                      <e p="AntiAliasingEditor.cs" t="Include" />
+                      <e p="IAntiAliasingEditor.cs" t="Include" />
+                    </e>
+                    <e p="FXAA" t="Include">
+                      <e p="Editor" t="Include">
+                        <e p="FXAAEditor.cs" t="Include" />
+                      </e>
+                      <e p="FXAA.cs" t="Include" />
+                      <e p="Resources" t="Include">
+                        <e p="FXAA.shader" t="Include" />
+                        <e p="FXAA3.cginc" t="Include" />
+                      </e>
+                    </e>
+                    <e p="IAntiAliasing.cs" t="Include" />
+                    <e p="SMAA" t="Include">
+                      <e p="Editor" t="Include">
+                        <e p="SMAAEditor.cs" t="Include" />
+                      </e>
+                      <e p="Resources" t="Include">
+                        <e p="SMAA.cginc" t="Include" />
+                        <e p="SMAA.shader" t="Include" />
+                      </e>
+                      <e p="SMAA.cs" t="Include" />
+                    </e>
+                  </e>
+                  <e p="Common" t="Include">
+                    <e p="Editor" t="Include">
+                      <e p="EditorGUIHelper.cs" t="Include" />
+                      <e p="FieldFinder.cs" t="Include" />
+                      <e p="MinDrawer.cs" t="Include" />
+                    </e>
+                    <e p="ImageEffectHelper.cs" t="Include" />
+                    <e p="MinAttribute.cs" t="Include" />
+                    <e p="RenderTextureUtility.cs" t="Include" />
+                  </e>
+                  <e p="ImageEffects" t="Include">
+                    <e p="Scripts" t="Include">
+                      <e p="Bloom.cs" t="Include" />
+                      <e p="BloomAndFlares.cs" t="Include" />
+                      <e p="BloomOptimized.cs" t="Include" />
+                      <e p="ImageEffectBase.cs" t="Include" />
+                      <e p="ImageEffects.cs" t="Include" />
+                      <e p="PostEffectsBase.cs" t="Include" />
+                      <e p="PostEffectsHelper.cs" t="Include" />
+                      <e p="Quads.cs" t="Include" />
+                      <e p="ScreenOverlay.cs" t="Include" />
+                      <e p="SunShafts.cs" t="Include" />
+                      <e p="Triangles.cs" t="Include" />
+                    </e>
+                    <e p="Shaders" t="Include">
+                      <e p="_BloomAndFlares" t="Include">
+                        <e p="Blend.shader" t="Include" />
+                        <e p="BlendForBloom.shader" t="Include" />
+                        <e p="BlendOneOne.shader" t="Include" />
+                        <e p="BlurAndFlares.shader" t="Include" />
+                        <e p="BrightPassFilter.shader" t="Include" />
+                        <e p="BrightPassFilter2.shader" t="Include" />
+                        <e p="LensFlareCreate.shader" t="Include" />
+                        <e p="MobileBloom.shader" t="Include" />
+                        <e p="MobileBlur.shader" t="Include" />
+                        <e p="MultiPassHollywoodFlares.shader" t="Include" />
+                        <e p="SeparableBlurPlus.shader" t="Include" />
+                        <e p="VignetteShader.shader" t="Include" />
+                      </e>
+                      <e p="BlendModesOverlay.shader" t="Include" />
+                      <e p="BlurEffectConeTaps.shader" t="Include" />
+                      <e p="Contrast Stretch" t="Include">
+                        <e p="Adaptation.shader" t="Include" />
+                        <e p="Apply.shader" t="Include" />
+                        <e p="Luminance.shader" t="Include" />
+                        <e p="MinMaxReduction.shader" t="Include" />
+                      </e>
+                      <e p="ContrastComposite.shader" t="Include" />
+                      <e p="ConvertDepth.shader" t="Include" />
+                      <e p="PrepareSunShaftsBlur.shader" t="Include" />
+                      <e p="ScreenSpaceRaytrace.cginc" t="Include" />
+                      <e p="ShowAlphaChannel.shader" t="Include" />
+                      <e p="SimpleClear.shader" t="Include" />
+                      <e p="SunShaftsComposite.shader" t="Include" />
+                    </e>
+                  </e>
+                </e>
+                <e p="Utility" t="Include">
+                  <e p="FPSCounter.cs" t="Include" />
+                </e>
+              </e>
+              <e p="Textures" t="Include">
+                <e p="README - Copyright.txt" t="Include" />
+              </e>
+            </e>
+            <e p="Shader" t="Include">
+              <e p="PlanetRingShader.shader" t="Include" />
+              <e p="PlanetShaderHi.shader" t="Include" />
+              <e p="PlanetShaderMobile.shader" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Asteroids Pack" t="Include">
           <e p="Assets" t="Include">
             <e p="Scripts" t="Include">
@@ -686,7 +798,6 @@
             </e>
           </e>
         </e>
-        <e p="OnCollision.cs" t="Include" />
         <e p="Plugins" t="Include">
           <e p="GitHub" t="Include">
             <e p="Editor" t="Include">
@@ -698,6 +809,12 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
+          <e p="Data Related" t="Include">
+            <e p="DataContainer.cs" t="Include" />
+            <e p="ExportDataUtil.cs" t="Include" />
+            <e p="IDGenerator.cs" t="Include" />
+            <e p="TrackData.cs" t="Include" />
+          </e>
           <e p="GameControls.cs" t="Include" />
           <e p="Laser &amp; Bubble" t="Include">
             <e p="BubbleMethod.cs" t="Include" />
@@ -708,6 +825,7 @@
               <e p="TargetPositionEvent.cs" t="Include" />
             </e>
           </e>
+          <e p="Minen.cs" t="Include" />
           <e p="Navigation never used" t="Include">
             <e p="AddInvertedMeshCollider.cs" t="Include" />
             <e p="Navigation.cs" t="Include" />
@@ -716,6 +834,7 @@
             <e p="Collisions" t="Include">
               <e p="CollisionTest.cs" t="Include" />
               <e p="FleetFly.cs" t="Include" />
+              <e p="OnCollision.cs" t="Include" />
             </e>
             <e p="Selected.cs" t="Include" />
             <e p="ShipMovement.cs" t="Include" />

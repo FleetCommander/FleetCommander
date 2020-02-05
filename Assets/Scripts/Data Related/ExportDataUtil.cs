@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System;
+using Oculus.Platform;
+using Application = UnityEngine.Application;
 
 public class ExportDataUtil {
    
@@ -22,13 +24,12 @@ public class ExportDataUtil {
 
     private static void createCSVFileWithHeader() {
         StringBuilder sbHeader = new StringBuilder();
-        string[] rowHeader = new string[6];
-        rowHeader[0] = "ID";
-        rowHeader[1] = "Type";
-        rowHeader[2] = "Inputs";
-        rowHeader[3] = "Mistakes(wrong portal)";
-        rowHeader[4] = "Time in sec";
-        rowHeader[5] = "Skipped a Level?";
+        string[] rowHeader = new string[5];
+        rowHeader[0] = "Type";
+        rowHeader[1] = "Inputs";
+        rowHeader[2] = "Mistakes(wrong portal)";
+        rowHeader[3] = "Time in sec";
+        rowHeader[4] = "Skipped a Level?";
         sbHeader.AppendLine(string.Join(",", rowHeader));
         File.WriteAllText(getPath(), sbHeader.ToString());
     }
