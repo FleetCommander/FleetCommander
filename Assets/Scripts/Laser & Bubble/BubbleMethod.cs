@@ -192,6 +192,7 @@ public class BubbleMethod : MonoBehaviour {
                 lastSelected.GetComponent<Collider>().enabled = true;
                 lastSelected.GetComponent<Renderer>().material.SetFloat(Outline, 0);
                 lastSelected.transform.GetComponent<Renderer>().materials = materials;
+                lastSelected.GetComponent<Selected>().ToggleSelection();
             }
 
             ToggleMode();

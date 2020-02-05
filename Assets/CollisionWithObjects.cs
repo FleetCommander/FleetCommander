@@ -20,13 +20,11 @@ public class CollisionWithObjects : MonoBehaviour {
             Destroy(transform.parent.gameObject);
             //todo success play sound
         }
-        
         else if (other.tag.Equals(HAZARD)) {
             Explode(other.gameObject);
             Explode(transform.parent.gameObject);
         }
-        
-        else {
+        else if(other.tag.Equals(GOAL) && !other.GetComponent<GoalColor>().goalColor.Equals(GetComponentInParent<UfoColor>().ufoColors)){
             Explode(transform.parent.gameObject);
         }
     }
