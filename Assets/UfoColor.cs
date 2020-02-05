@@ -7,8 +7,7 @@ using UnityEngine;
 public class UfoColor : MonoBehaviour {
     // Start is called before the first frame update
 
-    [SerializeField] private UfoColors ufoColors;
-    private Color color;
+    [SerializeField] public UfoColors ufoColors;
     
     // Update is called once per frame
     // Farbfestlegung der Oberflächenfarbe
