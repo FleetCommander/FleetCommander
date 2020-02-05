@@ -7,6 +7,4 @@ public class DestroySelf : MonoBehaviour {
     void Awake() {
         Destroy(gameObject, 5f);
     }
-
-
 }

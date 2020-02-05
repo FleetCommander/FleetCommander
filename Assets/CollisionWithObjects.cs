@@ -31,6 +31,7 @@ public class CollisionWithObjects : MonoBehaviour {
 
 
     private void Explode(GameObject target) {
+        DataContainer.getInstance().mistakes++;
         Instantiate(explosionEffect, target.transform.position, target.transform.rotation);
         //Todo wrong feedback
         Destroy(target);
