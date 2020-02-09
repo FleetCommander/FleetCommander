@@ -12,6 +12,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Minen.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/UfoColor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Oculus/Spatializer/editor/ONSPAudioPluginUpdater.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Laser &amp; Bubble/LaserMethod.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/LevelManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Laser &amp; Bubble/BubbleMethod.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Oculus/VR/Scripts/OVRManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Navigation never used/Navigation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Spaceship/ShipMovement.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -19,6 +26,11 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/Spaceship/ShipMovement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Minen.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Laser &amp; Bubble/LaserMethod.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Navigation never used/Navigation.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Laser &amp; Bubble/BubbleMethod.cs" />
+        <option value="$PROJECT_DIR$/Assets/UfoColor.cs" />
+        <option value="$PROJECT_DIR$/Assets/LevelManager.cs" />
       </list>
     </option>
   </component>
@@ -72,6 +84,7 @@
       <option name="presentableId" value="Default" />
       <updated>1580862730265</updated>
       <workItem from="1580862751737" duration="4844000" />
+      <workItem from="1581288538639" duration="3621000" />
     </task>
     <servers />
   </component>
@@ -85,7 +98,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

@@ -10,16 +10,28 @@ public class LevelManager : MonoBehaviour {
     
     [SerializeField] 
     void Awake() {
-        CountUfos("Blue Ufos");
-        CountUfos("Red Ufos");
-        CountUfos("Yellow Ufos");
+        CountUfos("Right Side Ufos");
+        CountUfos("Left Side Ufos");
+        CountUfos("Mix Rectangle");
+        CountUfos("Red Rectangle");
+        CountUfos("Blue Rectangle");
+        CountUfos("Red Triangle");
+        CountUfos("Blue Triangle");
+        CountUfos("Red Pyramid");
+        CountUfos("Blue Pyramid");
+        CountUfos("Red Cube");
+        CountUfos("Blue Cube");
+        CountUfos("Blue Ufo");
         Debug.Log("The ufos in this scene are " + ufoCount);
     }
 
     private void CountUfos(string groupName) {
-        GameObject group = GameObject.Find(groupName);
-        foreach (Transform child in group.transform) {
-            ufoCount++;
+        if(GameObject.Find(groupName)){
+            GameObject group = GameObject.Find(groupName);
+            foreach (Transform child in group.transform)
+            {
+                ufoCount++;
+            }
         }
     }
 
@@ -38,6 +50,7 @@ public class LevelManager : MonoBehaviour {
             (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) >= 0.9f)) {
 
             DataContainer.GetInstance().skippedLevel = true;
+            Debug.Log("Next Level");
             GoToNextScene();
             
         }

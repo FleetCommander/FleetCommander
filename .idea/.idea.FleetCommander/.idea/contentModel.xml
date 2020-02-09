@@ -127,6 +127,8 @@
             </e>
           </e>
         </e>
+        <e p="CollisionWithObjects.cs" t="Include" />
+        <e p="DestroySelf.cs" t="Include" />
         <e p="Editor" t="Include">
           <e p="AddInvertedMeshColliderEditor.cs" t="Include" />
           <e p="GroupCommand.cs" t="Include" />
@@ -136,9 +138,10 @@
             <e p="csDemoScenceControl.cs" t="Include" />
             <e p="csLightControl.cs" t="Include" />
             <e p="csMouseOrbit.cs" t="Include" />
-            <e p="DestroyEffect.cs" t="Include" />
           </e>
         </e>
+        <e p="GoalColor.cs" t="Include" />
+        <e p="LevelManager.cs" t="Include" />
         <e p="Material" t="Include">
           <e p="Shaders" t="Include">
             <e p="Border.shader" t="Include" />
@@ -815,7 +818,6 @@
             <e p="IDGenerator.cs" t="Include" />
             <e p="TrackData.cs" t="Include" />
           </e>
-          <e p="GameControls.cs" t="Include" />
           <e p="Laser &amp; Bubble" t="Include">
             <e p="BubbleMethod.cs" t="Include" />
             <e p="LaserMethod.cs" t="Include" />
@@ -832,8 +834,6 @@
           </e>
           <e p="Spaceship" t="Include">
             <e p="Collisions" t="Include">
-              <e p="CollisionTest.cs" t="Include" />
-              <e p="FleetFly.cs" t="Include" />
               <e p="OnCollision.cs" t="Include" />
             </e>
             <e p="Selected.cs" t="Include" />
