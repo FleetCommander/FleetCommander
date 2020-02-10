@@ -3283,6 +3283,11 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 971377340}
   m_PrefabAsset: {fileID: 0}
+    - target: {fileID: 1547252111506518031, guid: 92f4bf3db3d82814cafaeb6a3e281713,
+        type: 3}
+      propertyPath: selectionType
+      value: 1
+      objectReference: {fileID: 0}
 --- !u!1001 &1011716755
 PrefabInstance:
   m_ObjectHideFlags: 0

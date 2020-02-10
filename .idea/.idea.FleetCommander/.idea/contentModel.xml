@@ -841,6 +841,10 @@
             <e p="UfoColors.cs" t="Include" />
           </e>
         </e>
+        <e p="Sounds" t="Include">
+          <e p="Sound.cs" t="Include" />
+          <e p="SoundManager.cs" t="Include" />
+        </e>
         <e p="Starfield Skybox" t="Include">
           <e p="Demo" t="Include">
             <e p="Script" t="Include">
