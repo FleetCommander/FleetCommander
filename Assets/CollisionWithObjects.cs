@@ -18,13 +18,20 @@ public class CollisionWithObjects : MonoBehaviour {
             GameObject levelManager = GameObject.Find("LevelManager");
             levelManager.GetComponent<LevelManager>().AddPassedUfo();
             Destroy(transform.parent.gameObject);
-            //todo success play sound
+            
+            FindObjectOfType<SoundManager>().Play("Richtig");
         }
         else if (other.tag.Equals(HAZARD)) {
             Explode(other.gameObject);
+            GameObject levelManager = GameObject.Find("LevelManager");
+            levelManager.GetComponent<LevelManager>().AddFailedUfos();
             Explode(transform.parent.gameObject);
+            
+            
         }
         else if(other.tag.Equals(GOAL) && !other.GetComponent<GoalColor>().goalColor.Equals(GetComponentInParent<UfoColor>().ufoColors)){
+            GameObject levelManager = GameObject.Find("LevelManager");
+            levelManager.GetComponent<LevelManager>().AddFailedUfos();
             Explode(transform.parent.gameObject);
         }
     }
@@ -33,7 +40,8 @@ public class CollisionWithObjects : MonoBehaviour {
     private void Explode(GameObject target) {
         DataContainer.GetInstance().mistakes++;
         Instantiate(explosionEffect, target.transform.position, target.transform.rotation);
-        //Todo wrong feedback
+        
+        FindObjectOfType<SoundManager>().Play("Falsch");
         Destroy(target);
     }
 }

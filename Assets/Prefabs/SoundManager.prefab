@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1956960806041842861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1956960806041842862}
+  - component: {fileID: 1956960806041842863}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1956960806041842862
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956960806041842861}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.8584946, y: 8.838612, z: 4.1382465}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1956960806041842863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956960806041842861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d366c84f1dca4f4f910683f4b84a898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Ambience
+    clip: {fileID: 8300000, guid: 367b7b5012c71a1479e6d421cadacbba, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: UFO Idle
+    clip: {fileID: 8300000, guid: 59a23e5153a23734b84adb3500e480bd, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Tut Intro
+    clip: {fileID: 8300000, guid: 76df1241aedb33142a94dbd97cec2c63, type: 3}
+    volume: 1
+    pitch: 0.96
+    loop: 0
+    source: {fileID: 0}
+  - name: Tut Laser
+    clip: {fileID: 8300000, guid: da321b54fdbd1ed40a74fbcf53af28fa, type: 3}
+    volume: 1
+    pitch: 0.96
+    loop: 0
+    source: {fileID: 0}
+  - name: Tut Bubble
+    clip: {fileID: 8300000, guid: 710f3d95e009efe43a6d2ba460382971, type: 3}
+    volume: 1
+    pitch: 0.96
+    loop: 0
+    source: {fileID: 0}
+  - name: Tut Desel
+    clip: {fileID: 8300000, guid: fefb97ccdcafe3646b735fc9148c8c07, type: 3}
+    volume: 1
+    pitch: 0.96
+    loop: 0
+    source: {fileID: 0}
+  - name: Tut Nav
+    clip: {fileID: 8300000, guid: 8035ef43c5428994cbe819d60df688a4, type: 3}
+    volume: 1
+    pitch: 0.96
+    loop: 0
+    source: {fileID: 0}
+  - name: Roger
+    clip: {fileID: 8300000, guid: 948642101bc040443bcf6eca39f267df, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Falsch
+    clip: {fileID: 8300000, guid: ed4c1629ccc9b7f4b82e3b8f1b2f694b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Richtig
+    clip: {fileID: 8300000, guid: 26033dbb366b44c4a9b157f14fdb30ae, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bleep
+    clip: {fileID: 8300000, guid: ebc6be04837fb21479e95edb3fb95dcb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Zeit abgelaufen
+    clip: {fileID: 8300000, guid: ed4c1629ccc9b7f4b82e3b8f1b2f694b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

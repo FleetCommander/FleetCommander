@@ -129,6 +129,7 @@
         </e>
         <e p="CollisionWithObjects.cs" t="Include" />
         <e p="DestroySelf.cs" t="Include" />
+        <e p="Dontdestroyoonload.cs" t="Include" />
         <e p="Editor" t="Include">
           <e p="AddInvertedMeshColliderEditor.cs" t="Include" />
           <e p="GroupCommand.cs" t="Include" />
@@ -831,6 +832,10 @@
           <e p="Navigation never used" t="Include">
             <e p="AddInvertedMeshCollider.cs" t="Include" />
             <e p="Navigation.cs" t="Include" />
+          </e>
+          <e p="Sounds" t="Include">
+            <e p="Sound.cs" t="Include" />
+            <e p="SoundManager.cs" t="Include" />
           </e>
           <e p="Spaceship" t="Include">
             <e p="Collisions" t="Include">

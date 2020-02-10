@@ -5,6 +5,8 @@ using UnityEngine;
 public class DestroySelf : MonoBehaviour {
 
     void Awake() {
+        AudioSource boom = GetComponent<AudioSource>();
+        boom.Play();
         Destroy(gameObject, 5f);
     }
 }

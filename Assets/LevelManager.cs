@@ -1,13 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using OVR;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
     
     private float ufoCount;
     private int passedUfoCount;
-    
+
+    public GameObject score;
+    private Text ourScore;
+
+    public GameObject timer;
+    private Text ourTimer;
+
+    private float countdown;
+
+    private float skipTimer;
+    private int failedUfoCount;
+
     [SerializeField] 
     void Awake() {
         CountUfos("Right Side Ufos");
@@ -23,6 +36,29 @@ public class LevelManager : MonoBehaviour {
         CountUfos("Blue Cube");
         CountUfos("Blue Ufo");
         Debug.Log("The ufos in this scene are " + ufoCount);
+        
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+
+        if (sceneName == "Level 1 Laser" || sceneName == "Level1 Bubble") {
+            countdown = 180;
+        } else if (sceneName == "Level 2 Laser" || sceneName == "Level2 Bubble") {
+            countdown = 300;
+        }
+        else countdown = 999; // Platzhalterzahl für kein Timer
+        
+        
+        
+        score = GameObject.Find("Score");
+        ourScore = score.GetComponent<Text>();
+        
+        timer = GameObject.Find("Timer");
+        ourTimer = timer.GetComponent<Text>();
+
+        ourTimer.text = "Time left: -";
+        
+        ourScore.text = "Score: " + passedUfoCount + "/" + Get80Percent(ufoCount);
+        
     }
 
     private void CountUfos(string groupName) {
@@ -37,8 +73,24 @@ public class LevelManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        if (countdown < 999) {
+            countdown -= Time.deltaTime;
+            ourTimer.text = "Time left: " + countdown.ToString("0") + " seconds";
+        }
+
+        if (countdown < 0) {
+            FindObjectOfType<SoundManager>().Play("Zeit abgelaufen");
+            DataContainer.GetInstance().skippedLevel = true;
+            Debug.Log("Next Level");
+            GoToNextScene();
+            
+        }
         
         if (Get80Percent(ufoCount) <= passedUfoCount) {
+            GoToNextScene();
+        }
+        else if(passedUfoCount + failedUfoCount == (int) Mathf.Ceil(ufoCount)) {
             GoToNextScene();
         }
 
@@ -49,10 +101,13 @@ public class LevelManager : MonoBehaviour {
             (OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger) >= 0.9f) &&
             (OVRInput.Get(OVRInput.Axis1D.SecondaryIndexTrigger) >= 0.9f)) {
 
-            DataContainer.GetInstance().skippedLevel = true;
-            Debug.Log("Next Level");
-            GoToNextScene();
-            
+            skipTimer += Time.deltaTime;
+            if (skipTimer > 2) {
+                skipTimer = 0;
+                DataContainer.GetInstance().skippedLevel = true;
+                Debug.Log("Next Level");
+                GoToNextScene();
+            }
         }
     }
 
@@ -66,6 +121,11 @@ public class LevelManager : MonoBehaviour {
 
     public void AddPassedUfo() {
         passedUfoCount++;
+        ourScore.text = "Score: " + passedUfoCount + "/" + Get80Percent(ufoCount);
+    }
+    
+    public void AddFailedUfos() {
+        failedUfoCount++;
     }
 
     public void Print() {

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 57131845038496256}
   - component: {fileID: 57131845038496263}
   - component: {fileID: 57131845038496262}
-  - component: {fileID: 57131845038496261}
   - component: {fileID: 6661868302166010559}
   - component: {fileID: 6782731076943768796}
+  - component: {fileID: 7176923928179154308}
   m_Layer: 0
   m_Name: Red Goal Collision Detector
   m_TagString: Goal
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &57131845038496261
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 57131845038496260}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6661868302166010559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +110,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &7176923928179154308
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 57131845038496260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3941821, y: 1.4562306, z: 420.38507}
+  m_Center: {x: -0.027652068, y: -0.03888837, z: 209.69254}
 --- !u!1 &57131845764928770
 GameObject:
   m_ObjectHideFlags: 0

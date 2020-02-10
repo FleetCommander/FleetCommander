@@ -21,7 +21,7 @@ public class TrackData : MonoBehaviour{
         dataContainer = DataContainer.GetInstance();
         IDGenerator.GetNextId();
         dataContainer.type = selectionType == SelectionType.LASER ? "Laser" : "Bubble";
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
     }
 
 
@@ -30,7 +30,7 @@ public class TrackData : MonoBehaviour{
             dataContainer.inputs++;
         }
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Level2 Nav1")) {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("EndScene")) {
             ParseRowDataToExporter();
         }
     }

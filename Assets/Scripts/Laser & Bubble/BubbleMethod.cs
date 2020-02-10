@@ -58,7 +58,7 @@ public class BubbleMethod : MonoBehaviour {
      
         bobbelNavigation.transform.localScale = CalcScale(bobbelNavigation.transform.position - transform.position);
 
-        if (OVRInput.GetDown(OVRInput.Button.Start)) {
+        if (OVRInput.GetDown(OVRInput.Button.Three)) {
             ToggleMode();
         }
 
@@ -137,7 +137,7 @@ public class BubbleMethod : MonoBehaviour {
 
         // Losschicken zum Punkt
         if (OVRInput.GetDown(OVRInput.Button.One)) {
-            
+            FindObjectOfType<SoundManager>().Play("Roger");
             Vector3 targetPosition = bobbelNavigation.transform.position;
             Vector3 endPosition = targetPosition;
             float distance = 10;

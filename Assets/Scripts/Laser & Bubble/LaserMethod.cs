@@ -29,7 +29,7 @@ public class LaserMethod : MonoBehaviour {
     private Color standardcolor;
     private Material[] materials;
     private float buttonDownTimer;
-    private float delay = 1f;
+    private float delay = 0.5f;
     private Renderer bobbelRenderer;
     private Renderer bobbelSelectionRenderer;
     private GameObject lastGo = null;
@@ -47,7 +47,7 @@ public class LaserMethod : MonoBehaviour {
         bobbelRenderer.enabled = (mode == Modes.NAVIGATION);
         bobbel.transform.localScale = CalcScale(bobbel.transform.position - transform.position);
 
-        if (OVRInput.GetDown(OVRInput.Button.Start)) {
+        if (OVRInput.GetDown(OVRInput.Button.Three)) {
             ToggleMode();
         }
         if (OVRInput.GetDown(OVRInput.Button.Two)) {
@@ -110,6 +110,7 @@ public class LaserMethod : MonoBehaviour {
 
         if (OVRInput.Get(OVRInput.Button.One)) {
             if (buttonDownTimer == 0 || buttonDownTimer > delay) {
+                FindObjectOfType<SoundManager>().Play("Bleep");
                 go.GetComponent<Selected>().ToggleSelection();
                 go.GetComponent<Collider>().enabled = false;
                 materials = hit.transform.GetComponent<MeshRenderer>().materials;
@@ -151,6 +152,8 @@ public class LaserMethod : MonoBehaviour {
         
         // Losschicken zum Punkt
         if (OVRInput.GetDown(OVRInput.Button.One)) {
+            FindObjectOfType<SoundManager>().Play("Roger");
+
             Vector3 targetPosition = bobbel.transform.position;
             Vector3 endPosition = targetPosition;
             float distance = 10;
