@@ -11,16 +11,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Spaceship/ShipMovement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Dontdestroyoonload.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/LevelManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Oculus/Spatializer/editor/ONSPAudioPluginUpdater.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Navigation never used/Navigation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data Related/TrackData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Minen.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UfoColor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Oculus/Spatializer/editor/ONSPAudioPluginUpdater.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Laser &amp; Bubble/LaserMethod.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/LevelManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Laser &amp; Bubble/BubbleMethod.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Oculus/VR/Scripts/OVRManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Navigation never used/Navigation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Spaceship/ShipMovement.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Data Related/TrackData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Laser &amp; Bubble/BubbleMethod.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Laser &amp; Bubble/LaserMethod.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -31,6 +32,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Navigation never used/Navigation.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Laser &amp; Bubble/BubbleMethod.cs" />
         <option value="$PROJECT_DIR$/Assets/UfoColor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Dontdestroyoonload.cs" />
         <option value="$PROJECT_DIR$/Assets/LevelManager.cs" />
       </list>
     </option>
@@ -87,6 +89,7 @@
       <workItem from="1580862751737" duration="4844000" />
       <workItem from="1581288538639" duration="3621000" />
       <workItem from="1581342436111" duration="1795000" />
+      <workItem from="1581368436130" duration="3094000" />
     </task>
     <servers />
   </component>

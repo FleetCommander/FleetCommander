@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\gully\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\gully\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_FleetCommander.387947456.00" t="ExcludeRecursive" />
-    <e p="G:\github\FleetCommander" t="IncludeRecursive">
+    <e p="C:\Users\gully\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_FleetCommander.1988572166.00" t="ExcludeRecursive" />
+    <e p="G:\github\FleetCommander 2\FleetCommander" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
@@ -129,6 +129,7 @@
         </e>
         <e p="CollisionWithObjects.cs" t="Include" />
         <e p="DestroySelf.cs" t="Include" />
+        <e p="Dontdestroyoonload.cs" t="Include" />
         <e p="Editor" t="Include">
           <e p="AddInvertedMeshColliderEditor.cs" t="Include" />
           <e p="GroupCommand.cs" t="Include" />
@@ -832,6 +833,10 @@
             <e p="AddInvertedMeshCollider.cs" t="Include" />
             <e p="Navigation.cs" t="Include" />
           </e>
+          <e p="Sounds" t="Include">
+            <e p="Sound.cs" t="Include" />
+            <e p="SoundManager.cs" t="Include" />
+          </e>
           <e p="Spaceship" t="Include">
             <e p="Collisions" t="Include">
               <e p="OnCollision.cs" t="Include" />
@@ -840,10 +845,6 @@
             <e p="ShipMovement.cs" t="Include" />
             <e p="UfoColors.cs" t="Include" />
           </e>
-        </e>
-        <e p="Sounds" t="Include">
-          <e p="Sound.cs" t="Include" />
-          <e p="SoundManager.cs" t="Include" />
         </e>
         <e p="Starfield Skybox" t="Include">
           <e p="Demo" t="Include">

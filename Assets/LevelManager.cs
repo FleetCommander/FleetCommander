@@ -40,9 +40,9 @@ public class LevelManager : MonoBehaviour {
         Scene currentScene = SceneManager.GetActiveScene();
         string sceneName = currentScene.name;
 
-        if (sceneName == "Level 1 Laser" || sceneName == "Level1 Bubble") {
+        if (sceneName == "Level 1 Laser" || sceneName == "Level 1 Bubble") {
             countdown = 180;
-        } else if (sceneName == "Level 2 Laser" || sceneName == "Level2 Bubble") {
+        } else if (sceneName == "Level 2 Laser" || sceneName == "Level 2 Bubble") {
             countdown = 300;
         }
         else countdown = 999; // Platzhalterzahl für kein Timer
