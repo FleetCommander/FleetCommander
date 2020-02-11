@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using OVR;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,11 +15,20 @@ public class LevelManager : MonoBehaviour {
 
     public GameObject timer;
     private Text ourTimer;
+    
+    public GameObject status;
+    private Text ourStatus;
+    
+    public GameObject menBut;
+    private Image ourMenBut;
 
     private float countdown;
 
     private float skipTimer;
     private int failedUfoCount;
+    
+    private bool stop;
+    private bool failed;
 
     [SerializeField]
     void Awake() {
@@ -52,10 +62,35 @@ public class LevelManager : MonoBehaviour {
 
         timer = GameObject.Find("Timer");
         ourTimer = timer.GetComponent<Text>();
+        
+        status = GameObject.Find("Status");
+        ourStatus = status.GetComponent<Text>();
+        
+        menBut = GameObject.Find("MenuBut");
+        ourMenBut = menBut.GetComponent<Image>();
 
         ourTimer.text = "Time left: -";
 
+        ourStatus.text = " ";
+
         ourScore.text = "Score: " + passedUfoCount + "/" + Get80Percent(ufoCount);
+
+        stop = false;
+        failed = false;
+        ourMenBut.enabled = false;
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3)) {
+            int endscore = DataContainer.GetInstance().endScore;
+            if (endscore > 113) {
+                ourStatus.text = "GRATULATION KOMMANDANT!!!";
+                ourStatus.fontSize = 80;
+            } else ourStatus.text = "Vielen Dank für die Teilnahme.";
+            
+            ourScore.text = "Endscore: " + endscore.ToString("0" ) + "/114";
+            ourTimer.text = "Benötigte Zeit: " + DataContainer.GetInstance().endTime.ToString("0") + " Sekunden";
+            
+
+        }
     }
 
     private void CountUfos(string groupName) {
@@ -70,10 +105,11 @@ public class LevelManager : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (countdown < 999) {
-            countdown -= Time.deltaTime;
+            if(!stop) countdown -= Time.deltaTime;
             ourTimer.text = "Time left: " + countdown.ToString("0") + " seconds";
         }
 
+       
         if (countdown < 0) {
             FindObjectOfType<SoundManager>().Play("Zeit abgelaufen");
             if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1)) {
@@ -84,14 +120,45 @@ public class LevelManager : MonoBehaviour {
                 DataContainer.GetInstance().level2SkippedLevel = true;
             }
 
-            GoToNextScene();
+            stop = true;
+            ourMenBut.enabled = true;
+            ourStatus.text = "Mission fehlgeschlagen! Drücke         um fortzufahren.";
+            failed = true;
+
+            if (OVRInput.GetDown(OVRInput.Button.Start)) {
+                DataContainer.GetInstance().endScore += passedUfoCount;
+                
+                GoToNextScene();
+            }
         }
 
-        if (Get80Percent(ufoCount) <= passedUfoCount) {
-            GoToNextScene();
+        if (Get80Percent(ufoCount) <= passedUfoCount && !failed && SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(3)) {
+            stop = true;
+            ourMenBut.enabled = true;
+            ourStatus.text = "Mission abgeschlossen! Drücke         um fortzufahren.";
+            if (OVRInput.GetDown(OVRInput.Button.Start)) {
+                
+                if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) {
+                    DataContainer.GetInstance().endScore += passedUfoCount;
+                    DataContainer.GetInstance().endTime -= (int) countdown;
+                }
+                GoToNextScene();
+            }
         }
-        else if (passedUfoCount + failedUfoCount == (int) Mathf.Ceil(ufoCount)) {
-            GoToNextScene();
+        else if (passedUfoCount + failedUfoCount == (int) Mathf.Ceil(ufoCount) && SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(3)) {
+            stop = true;
+            ourMenBut.enabled = true;
+            ourStatus.text = "Mission fehlgeschlagen! Drücke         um fortzufahren.";
+            if (OVRInput.GetDown(OVRInput.Button.Start)) {
+                
+                if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0)) {
+                    
+                    DataContainer.GetInstance().endScore += passedUfoCount;
+                    DataContainer.GetInstance().endTime -= (int) countdown;
+                }
+                
+                GoToNextScene();
+            }
         }
 
         if (OVRInput.Get(OVRInput.Button.One) &&
@@ -118,6 +185,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     private static void GoToNextScene() {
+        
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0)) {
             DataContainer.GetInstance().tutorialTime = (int) Time.time;
         }
@@ -138,12 +206,12 @@ public class LevelManager : MonoBehaviour {
     }
 
     public void AddPassedUfo() {
-        passedUfoCount++;
+        if(!stop) passedUfoCount++;
         ourScore.text = "Score: " + passedUfoCount + "/" + Get80Percent(ufoCount);
     }
 
     public void AddFailedUfos() {
-        failedUfoCount++;
+        if(!stop) failedUfoCount++;
     }
 
     public void Print() {

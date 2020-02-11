@@ -8,6 +8,8 @@ public sealed class DataContainer{
     private static DataContainer dataContainer = new DataContainer();
 
     public int tutorialTime;
+    public int endScore;
+    public int endTime = 480;
 
     public int id;
     public string type;
