@@ -1,13 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class IDGenerator: ScriptableObject {
-    [SerializeField]
-    private static int id;
+namespace Data_Related {
+    [CreateAssetMenu(fileName = "IDGenerator", menuName = "IDGenerator")]
+    public class IDGenerator : ScriptableObject {
+    
+        private int id;
 
-    public static int GetNextId() {
-        
-        return id++;
+        public int GetNextId() {
+            id++;
+            return id;
+        }
     }
 }

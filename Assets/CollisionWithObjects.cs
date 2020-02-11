@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionWithObjects : MonoBehaviour {
     
@@ -38,7 +39,13 @@ public class CollisionWithObjects : MonoBehaviour {
 
 
     private void Explode(GameObject target) {
-        DataContainer.GetInstance().mistakes++;
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1)) {
+            DataContainer.GetInstance().level1Mistakes++;
+        }
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2)) {
+            DataContainer.GetInstance().level2Mistakes++;
+        }
+        
         Instantiate(explosionEffect, target.transform.position, target.transform.rotation);
         
         FindObjectOfType<SoundManager>().Play("Falsch");

@@ -8,22 +8,22 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Laser Level/Tutorial Laser.unity
     guid: 08499caa915adf84084ca77cd5e230b7
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Laser Level/Level 1 Laser.unity
     guid: 567d9c57dfc812743a264781bd752449
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Laser Level/Level 2 Laser.unity
     guid: 60f1b22437285f2488923e07edffd37a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bubble Level/Tutorial Bubble.unity
     guid: a7f3e67d1360d984498b03b9136872fa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bubble Level/Level 1 Bubble.unity
     guid: 50a3ae3cdc26bcc4a88da6b912a35ca4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bubble Level/Level 2 Bubble.unity
     guid: 81304103defdf0849badb968d46a728a
   - enabled: 1

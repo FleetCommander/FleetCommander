@@ -21,15 +21,21 @@ public class ExportDataUtil {
         File.AppendAllText(getPath(), sb.ToString());
 
     }
-
+     
     private static void createCSVFileWithHeader() {
         StringBuilder sbHeader = new StringBuilder();
-        string[] rowHeader = new string[5];
-        rowHeader[0] = "Type";
-        rowHeader[1] = "Inputs";
-        rowHeader[2] = "Mistakes(wrong portal)";
-        rowHeader[3] = "Time in sec";
-        rowHeader[4] = "Skipped a Level?";
+        string[] rowHeader = new string[10];
+        rowHeader[0] = "ID";
+        rowHeader[1] = "Type";
+        rowHeader[2] = "Level1 Inputs";
+        rowHeader[3] = "Level1 Mistakes";
+        rowHeader[4] = "Level1 Time in sec";
+        rowHeader[5] = "Level1 Skipped a Level?";
+        rowHeader[6] = "Level2 Inputs";
+        rowHeader[7] = "Level2 Mistakes";
+        rowHeader[8] = "Level2 Time in sec";
+        rowHeader[9] = "Level2 Skipped a Level?";
+        
         sbHeader.AppendLine(string.Join(",", rowHeader));
         File.WriteAllText(getPath(), sbHeader.ToString());
     }
