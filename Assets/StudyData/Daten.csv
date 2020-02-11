@@ -4,3 +4,4 @@ ID,Type,Level1 Inputs,Level1 Mistakes,Level1 Time in sec,Level1 Skipped a Level?
 1,Laser,1,0,23,True,1,0,15,True
 1,Laser,2,0,6,True,1,0,15,True
 2,Laser,1,0,6,True,1,0,5,True
+1,Laser,1,0,3,True,1,0,3,True

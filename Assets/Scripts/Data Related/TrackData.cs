@@ -4,8 +4,9 @@ using Data_Related;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TrackData : MonoBehaviour{
+public class TrackData : MonoBehaviour {
 
+    [SerializeField] private IDGenerator idGenerator;
     private const string ENDSCENE = "EndScene";
     
     enum SelectionType {
@@ -41,8 +42,8 @@ public class TrackData : MonoBehaviour{
     }
 
     private void ParseRowDataToExporter() {
-        dataContainer.id = Resources.Load<IDGenerator>("IDGenerator").GetNextId();
-
+        dataContainer.id = idGenerator.GetNextId();
+        
         string[] rowData = new string[10];
         rowData[0] = dataContainer.id.ToString();
         rowData[1] = dataContainer.type;
