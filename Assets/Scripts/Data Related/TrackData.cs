@@ -4,20 +4,19 @@ using Data_Related;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TrackData : MonoBehaviour {
-
+public class TrackData : MonoBehaviour{
     [SerializeField] private IDGenerator idGenerator;
     private const string ENDSCENE = "EndScene";
-    
-    enum SelectionType {
-        LASER, BUBBLE
+
+    enum SelectionType{
+        LASER,
+        BUBBLE
     }
 
-    [SerializeField]
-    private SelectionType selectionType;
+    [SerializeField] private SelectionType selectionType;
 
     private DataContainer dataContainer;
-    
+
 
     void Awake(){
         dataContainer = DataContainer.GetInstance();
@@ -27,23 +26,24 @@ public class TrackData : MonoBehaviour {
 
 
     void Update(){
-        if (OVRInput.GetDown(OVRInput.Button.Any)) {
-            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1)) {
+        if (OVRInput.GetDown(OVRInput.Button.Any)){
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1)){
                 dataContainer.level1Inputs++;
             }
-            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2)) {
+
+            if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2)){
                 dataContainer.level2Inputs++;
             }
         }
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("EndScene")) {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByName("EndScene")){
             ParseRowDataToExporter();
         }
     }
 
-    private void ParseRowDataToExporter() {
-        dataContainer.id = idGenerator.GetNextId();
-        
+    private void ParseRowDataToExporter(){
+        dataContainer.id = IDGenerator.GetNextId();
+
         string[] rowData = new string[10];
         rowData[0] = dataContainer.id.ToString();
         rowData[1] = dataContainer.type;
@@ -55,7 +55,7 @@ public class TrackData : MonoBehaviour {
         rowData[7] = dataContainer.level2Mistakes.ToString();
         rowData[8] = dataContainer.level2Time.ToString();
         rowData[9] = dataContainer.level2SkippedLevel.ToString();
-        
+
         ExportDataUtil.SaveDataToCsv(rowData);
         Destroy(gameObject);
     }
